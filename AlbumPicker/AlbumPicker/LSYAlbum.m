@@ -7,14 +7,77 @@
 //
 
 #import "LSYAlbum.h"
+@interface LSYAlbum ()
 
+@end
 @implementation LSYAlbum
 +(LSYAlbum *)sharedAlbum{
-    static LSYAlbum *album = nil;
+    static LSYAlbum *_album = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        album = [[LSYAlbum alloc] init];
+        _album = [[LSYAlbum alloc] init];
+        _album.assetsLibrary = [[ALAssetsLibrary alloc] init];
+        _album.assstsFilter = [ALAssetsFilter allAssets];
     });
-    return album;
+    return _album;
+}
+-(void)setupAlbumGroups
+{
+    NSMutableArray *groups = @[].mutableCopy;
+    ALAssetsLibraryGroupsEnumerationResultsBlock resultBlock = ^(ALAssetsGroup *group, BOOL *stop){
+        if (group) {
+            [group setAssetsFilter:self.assstsFilter];
+            NSInteger groupType = [[group valueForProperty:ALAssetsGroupPropertyType] integerValue];
+            if (groupType == ALAssetsGroupSavedPhotos) {
+                [groups insertObject:group atIndex:0];
+            }
+            else
+            {
+                if (group.numberOfAssets>0) {
+                    [groups addObject:group];
+                }
+            }
+        }
+        else
+        {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(albumGroups:)]) {
+                [self.delegate albumGroups:groups];
+            }
+        }
+    };
+    ALAssetsLibraryAccessFailureBlock failureBlock = ^(NSError *error) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(albumGroups:)]) {
+            [self.delegate albumGroups:groups];
+        }
+    };
+    [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:resultBlock failureBlock:failureBlock];
+    
+    
+}
+-(void)setupAlbumAssets:(ALAssetsGroup *)group
+{
+    NSMutableArray *assets = @[].mutableCopy;
+    [group setAssetsFilter:self.assstsFilter];
+    //相册内资源总数
+    NSInteger assetCount = [group numberOfAssets];
+    ALAssetsGroupEnumerationResultsBlock resultBlock = ^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+        if (asset) {
+            [assets addObject:assets];
+            NSString *assetType = [asset valueForProperty:ALAssetPropertyType];
+            if ([assetType isEqualToString:ALAssetTypePhoto]) {
+                
+            }
+            else if ([assetType isEqualToString:ALAssetTypeVideo]) {
+                
+            }
+        }
+        else if (assets.count >= assetCount)
+        {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(AlbumAssets:)]) {
+                [self.delegate AlbumAssets:assets];
+            }
+        };
+    };
+    [group enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:resultBlock];
 }
 @end

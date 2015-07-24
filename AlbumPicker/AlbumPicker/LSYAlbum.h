@@ -9,8 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+@protocol LSYAlbumDelegate <NSObject>
+-(void)albumGroups:(NSMutableArray *)group;
+-(void)AlbumAssets:(NSMutableArray *)assets;
+@end
 @interface LSYAlbum : NSObject
 @property (nonatomic,strong) ALAssetsGroup *assetsGroup;
 @property (nonatomic,strong) ALAssetsLibrary *assetsLibrary;
+@property (nonatomic,strong) ALAssetsFilter *assstsFilter;
+@property (nonatomic,weak) id<LSYAlbumDelegate> delegate;
 +(LSYAlbum *)sharedAlbum;
+-(void)setupAlbumGroups;
+-(void)setupAlbumAssets:(ALAssetsGroup *)group;
 @end
