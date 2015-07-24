@@ -21,12 +21,18 @@
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.dataArr.count;
+    return self.albumDataArray.count;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     LSYAlbumCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kAlbumCellIdentifer forIndexPath:indexPath];
-    cell.asset = self.dataArr[indexPath.row];
+    cell.asset = self.albumDataArray[indexPath.row];
     return cell;
 }
+
+#pragma mark -UITableViewDelegate
+
+#pragma mark -UITabViewDataSource
+
+
 @end

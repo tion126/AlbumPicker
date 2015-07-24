@@ -66,7 +66,7 @@
 {
     _albumAssets = assets;
     if (_albumAssets.count>0) {
-        self.albumDelegateDataSource.dataArr = _albumAssets;
+        self.albumDelegateDataSource.albumDataArray = _albumAssets;
         [self.albumView reloadData];
     }
 }

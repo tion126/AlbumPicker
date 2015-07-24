@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "LSYAlbumPicker.h"
+#import "LSYNavigationController.h"
 @interface ViewController ()
 
 @end
@@ -21,7 +22,8 @@
  
 }
 - (IBAction)enterAlbum:(id)sender {
-    [self presentViewController:[[LSYAlbumPicker alloc] init] animated:YES completion:^{
+    LSYNavigationController *navigation = [[LSYNavigationController alloc] initWithRootViewController:[[LSYAlbumPicker alloc] init]];
+    [self presentViewController:navigation animated:YES completion:^{
         
     }];
 }

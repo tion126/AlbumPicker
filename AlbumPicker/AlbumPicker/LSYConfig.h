@@ -10,5 +10,5 @@
 #define AlbumPicker_LSYConfig_h
 #import <Foundation/Foundation.h>
 static NSString * const kAlbumCellIdentifer = @"albumCellIdentifer";
-
+static NSString * const kAlbumCatalogCellIdentifer = @"albumCatalogCellIdentifer";
 #endif
