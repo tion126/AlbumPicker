@@ -62,7 +62,7 @@
     NSInteger assetCount = [group numberOfAssets];
     ALAssetsGroupEnumerationResultsBlock resultBlock = ^(ALAsset *asset, NSUInteger index, BOOL *stop) {
         if (asset) {
-            [assets addObject:assets];
+            [assets addObject:asset];
             NSString *assetType = [asset valueForProperty:ALAssetPropertyType];
             if ([assetType isEqualToString:ALAssetTypePhoto]) {
                 
@@ -73,8 +73,8 @@
         }
         else if (assets.count >= assetCount)
         {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(AlbumAssets:)]) {
-                [self.delegate AlbumAssets:assets];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(albumAssets:)]) {
+                [self.delegate albumAssets:assets];
             }
         };
     };

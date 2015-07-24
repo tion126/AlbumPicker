@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <AssetsLibrary/AssetsLibrary.h>
+
 @protocol LSYAlbumDelegate <NSObject>
 -(void)albumGroups:(NSMutableArray *)group;
--(void)AlbumAssets:(NSMutableArray *)assets;
+-(void)albumAssets:(NSMutableArray *)assets;
 @end
 @interface LSYAlbum : NSObject
 @property (nonatomic,strong) ALAssetsGroup *assetsGroup;

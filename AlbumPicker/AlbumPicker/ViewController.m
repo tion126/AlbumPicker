@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "LSYAlbumPicker.h"
 @interface ViewController ()
 
 @end
@@ -19,6 +19,11 @@
     // Do any additional setup after loading the view, typically from a nib.
     
  
+}
+- (IBAction)enterAlbum:(id)sender {
+    [self presentViewController:[[LSYAlbumPicker alloc] init] animated:YES completion:^{
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
