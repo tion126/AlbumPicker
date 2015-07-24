@@ -18,7 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.navigationBar setBarStyle:UIBarStyleBlackOpaque];
-    
+    [self.navigationBar setTintColor:[UIColor whiteColor]];
     
 }
 

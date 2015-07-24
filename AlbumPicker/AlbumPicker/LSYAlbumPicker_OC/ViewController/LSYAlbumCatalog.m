@@ -7,9 +7,11 @@
 //
 
 #import "LSYAlbumCatalog.h"
-
+#import "LSYDelegateDataSource.h"
 @interface LSYAlbumCatalog ()
 @property (nonatomic,strong) UITableView *albumTabView;
+@property (nonatomic,strong) LSYDelegateDataSource *albumDelegateDataSource;
+@property (nonatomic,strong) NSMutableArray *dataArray;
 @end
 
 @implementation LSYAlbumCatalog
@@ -17,8 +19,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:self.albumTabView];
 }
-
+-(UITableView *)albumTabView
+{
+    if (!_albumTabView) {
+        _albumTabView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ViewSize(self.view).width, ViewSize(self.view).height) style:UITableViewStylePlain];
+        _albumTabView.delegate = self.albumDelegateDataSource;
+        _albumTabView.dataSource = self.albumDelegateDataSource;
+        _albumTabView.rowHeight = 70;
+        _albumTabView.tableFooterView = [[UIView alloc] init];
+    }
+    return _albumTabView;
+}
+-(LSYDelegateDataSource *)albumDelegateDataSource
+{
+    if (!_albumDelegateDataSource) {
+        _albumDelegateDataSource = [[LSYDelegateDataSource alloc] init];
+    }
+    return _albumDelegateDataSource;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

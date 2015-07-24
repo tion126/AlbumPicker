@@ -32,7 +32,23 @@
 
 #pragma mark -UITableViewDelegate
 
+
 #pragma mark -UITabViewDataSource
-
-
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LSYAlbumCatalogCell *cell = [tableView dequeueReusableCellWithIdentifier:kAlbumCatalogCellIdentifer];
+    if (cell == nil) {
+        cell = [[LSYAlbumCatalogCell alloc] init];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    return cell;
+}
 @end

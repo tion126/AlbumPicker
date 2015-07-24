@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LSYAlbumCell.h"
+#import "LSYAlbumCatalogCell.h"
 @interface LSYDelegateDataSource : NSObject<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) NSArray *albumDataArray;
 @property (nonatomic,strong) NSArray *albumCatalogDataArray;
