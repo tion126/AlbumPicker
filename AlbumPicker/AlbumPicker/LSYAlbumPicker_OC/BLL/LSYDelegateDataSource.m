@@ -40,15 +40,16 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.albumCatalogDataArray.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LSYAlbumCatalogCell *cell = [tableView dequeueReusableCellWithIdentifier:kAlbumCatalogCellIdentifer];
     if (cell == nil) {
-        cell = [[LSYAlbumCatalogCell alloc] init];
+        cell = [[LSYAlbumCatalogCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kAlbumCatalogCellIdentifer];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
+    cell.group = self.albumCatalogDataArray[indexPath.row];
     return cell;
 }
 @end

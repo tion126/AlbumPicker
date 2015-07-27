@@ -9,10 +9,9 @@
 #import "LSYAlbumPicker.h"
 #import "LSYDelegateDataSource.h"
 #import "LSYAlbum.h"
-@interface LSYAlbumPicker ()<LSYAlbumDelegate>
+@interface LSYAlbumPicker ()
 @property (nonatomic,strong) UICollectionView *albumView;
 @property (nonatomic,strong) LSYDelegateDataSource *albumDelegateDataSource;
-@property (nonatomic,strong) NSMutableArray *albumGroups;
 @property (nonatomic,strong) NSMutableArray *albumAssets;
 
 @end
@@ -47,8 +46,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.albumView];
-    [LSYAlbum sharedAlbum].delegate = self;
-    [[LSYAlbum sharedAlbum] setupAlbumGroups];
+    [[LSYAlbum sharedAlbum] setupAlbumAssets:self.group withAssets:^(NSMutableArray *assets) {
+        self.albumAssets = assets;
+        self.albumDelegateDataSource.albumDataArray = assets;
+        [self.albumView reloadData];
+    }];
     // Do any additional setup after loading the view.
 }
 
@@ -61,22 +63,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-#pragma mark -LSYAlbumDelegate
--(void)albumAssets:(NSMutableArray *)assets
-{
-    _albumAssets = assets;
-    if (_albumAssets.count>0) {
-        self.albumDelegateDataSource.albumDataArray = _albumAssets;
-        [self.albumView reloadData];
-    }
-}
--(void)albumGroups:(NSMutableArray *)group
-{
-    _albumGroups = group;
-    if (_albumGroups.count > 0) {
-        [[LSYAlbum sharedAlbum] setupAlbumAssets:[_albumGroups firstObject]];
-    }
-}
+
+
 /*
 #pragma mark - Navigation
 

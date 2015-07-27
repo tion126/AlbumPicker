@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface LSYAlbumCatalogCell : UITableViewCell
-
+@property (nonatomic,strong) ALAssetsGroup *group;
 @end

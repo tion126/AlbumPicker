@@ -21,7 +21,7 @@
     });
     return _album;
 }
--(void)setupAlbumGroups
+-(void)setupAlbumGroups:(albumGroupsBlock)albumGroups
 {
     NSMutableArray *groups = @[].mutableCopy;
     ALAssetsLibraryGroupsEnumerationResultsBlock resultBlock = ^(ALAssetsGroup *group, BOOL *stop){
@@ -40,21 +40,24 @@
         }
         else
         {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(albumGroups:)]) {
-                [self.delegate albumGroups:groups];
+            _groups = groups;
+            if (albumGroups) {
+                albumGroups(groups);
             }
+            
         }
     };
     ALAssetsLibraryAccessFailureBlock failureBlock = ^(NSError *error) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(albumGroups:)]) {
-            [self.delegate albumGroups:groups];
+        _groups = groups;
+        if (albumGroups) {
+            albumGroups(groups);
         }
     };
     [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:resultBlock failureBlock:failureBlock];
     
     
 }
--(void)setupAlbumAssets:(ALAssetsGroup *)group
+-(void)setupAlbumAssets:(ALAssetsGroup *)group withAssets:(albumAssetsBlock)albumAssets
 {
     NSMutableArray *assets = @[].mutableCopy;
     [group setAssetsFilter:self.assstsFilter];
@@ -73,9 +76,11 @@
         }
         else if (assets.count >= assetCount)
         {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(albumAssets:)]) {
-                [self.delegate albumAssets:assets];
+            _assets = assets;
+            if (albumAssets) {
+                albumAssets(assets);
             }
+            
         };
     };
     [group enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:resultBlock];

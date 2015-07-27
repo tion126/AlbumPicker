@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface LSYAlbumPicker : UIViewController
-
+@property (nonatomic,strong) ALAssetsGroup *group;
 @end

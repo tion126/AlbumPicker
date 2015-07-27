@@ -8,7 +8,8 @@
 
 #import "LSYAlbumCatalog.h"
 #import "LSYDelegateDataSource.h"
-@interface LSYAlbumCatalog ()
+#import "LSYAlbumPicker.h"
+@interface LSYAlbumCatalog ()<UITableViewDelegate>
 @property (nonatomic,strong) UITableView *albumTabView;
 @property (nonatomic,strong) LSYDelegateDataSource *albumDelegateDataSource;
 @property (nonatomic,strong) NSMutableArray *dataArray;
@@ -21,12 +22,18 @@
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:self.albumTabView];
+    [[LSYAlbum sharedAlbum] setupAlbumGroups:^(NSMutableArray *groups) {
+        self.dataArray = groups;
+        self.albumDelegateDataSource.albumCatalogDataArray = groups;
+        [self.albumTabView reloadData];
+    }];
+    
 }
 -(UITableView *)albumTabView
 {
     if (!_albumTabView) {
         _albumTabView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ViewSize(self.view).width, ViewSize(self.view).height) style:UITableViewStylePlain];
-        _albumTabView.delegate = self.albumDelegateDataSource;
+        _albumTabView.delegate = self;
         _albumTabView.dataSource = self.albumDelegateDataSource;
         _albumTabView.rowHeight = 70;
         _albumTabView.tableFooterView = [[UIView alloc] init];
@@ -39,6 +46,15 @@
         _albumDelegateDataSource = [[LSYDelegateDataSource alloc] init];
     }
     return _albumDelegateDataSource;
+}
+#pragma mark -UITabViewDelegate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    LSYAlbumPicker *albumPicker = [[LSYAlbumPicker alloc] init];
+    albumPicker.group = self.dataArray[indexPath.row];
+    [self.navigationController pushViewController:albumPicker animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
