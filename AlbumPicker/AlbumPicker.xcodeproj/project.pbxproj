@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		870212D51B65C23A00047593 /* AlbumPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 870212D41B65C23A00047593 /* AlbumPicker.bundle */; };
+		870212D81B6610EB00047593 /* LSYPickerButtomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 870212D71B6610EB00047593 /* LSYPickerButtomView.m */; };
 		876F578E1B62259B002DC044 /* LSYAlbumPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 876F578D1B62259B002DC044 /* LSYAlbumPicker.m */; };
 		876F57911B6225E5002DC044 /* LSYAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 876F57901B6225E5002DC044 /* LSYAlbumCell.m */; };
 		876F57961B622621002DC044 /* LSYAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 876F57931B622621002DC044 /* LSYAlbum.m */; };
@@ -38,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		870212D41B65C23A00047593 /* AlbumPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlbumPicker.bundle; sourceTree = "<group>"; };
+		870212D61B6610EB00047593 /* LSYPickerButtomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSYPickerButtomView.h; sourceTree = "<group>"; };
+		870212D71B6610EB00047593 /* LSYPickerButtomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSYPickerButtomView.m; sourceTree = "<group>"; };
 		876F57811B61EC27002DC044 /* AlbumPicker-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AlbumPicker-prefix.pch"; sourceTree = "<group>"; };
 		876F57821B61EEAE002DC044 /* LSYConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSYConfig.h; sourceTree = "<group>"; };
 		876F578C1B62259B002DC044 /* LSYAlbumPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSYAlbumPicker.h; path = LSYAlbumPicker_OC/ViewController/LSYAlbumPicker.h; sourceTree = "<group>"; };
@@ -97,6 +100,8 @@
 				876F57901B6225E5002DC044 /* LSYAlbumCell.m */,
 				876F57AC1B622F73002DC044 /* LSYAlbumCatalogCell.h */,
 				876F57AD1B622F73002DC044 /* LSYAlbumCatalogCell.m */,
+				870212D61B6610EB00047593 /* LSYPickerButtomView.h */,
+				870212D71B6610EB00047593 /* LSYPickerButtomView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 			files = (
 				876F57A11B6229D3002DC044 /* LSYNavigationController.m in Sources */,
 				876F578E1B62259B002DC044 /* LSYAlbumPicker.m in Sources */,
+				870212D81B6610EB00047593 /* LSYPickerButtomView.m in Sources */,
 				87FC6EEC1B609B110061BB1F /* ViewController.m in Sources */,
 				876F57AB1B622DD0002DC044 /* LSYAlbumCatalog.m in Sources */,
 				876F57AE1B622F73002DC044 /* LSYAlbumCatalogCell.m in Sources */,

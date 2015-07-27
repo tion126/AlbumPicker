@@ -26,6 +26,11 @@
         self.dataArray = groups;
         self.albumDelegateDataSource.albumCatalogDataArray = groups;
         [self.albumTabView reloadData];
+        if (self.isFirstEnter) {
+            LSYAlbumPicker *albumPicker = [[LSYAlbumPicker alloc] init];
+            albumPicker.group = [self.dataArray firstObject];
+            [self.navigationController pushViewController:albumPicker animated:NO];
+        }
     }];
     
 }

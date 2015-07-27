@@ -7,12 +7,21 @@
 //
 
 #import "LSYNavigationController.h"
-
+#import "LSYAlbumPicker.h"
+#import "LSYAlbumCatalog.h"
 @interface LSYNavigationController ()
 
 @end
 
 @implementation LSYNavigationController
+-(instancetype)initWithRootViewController:(UIViewController *)rootViewController
+{
+    self = [super initWithRootViewController:rootViewController];
+    if (self) {
+        ((LSYAlbumCatalog *)rootViewController).isFirstEnter = YES;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

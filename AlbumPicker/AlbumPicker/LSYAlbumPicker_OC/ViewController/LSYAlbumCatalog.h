@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface LSYAlbumCatalog : UIViewController
-
+@property (nonatomic) BOOL isFirstEnter;
 @end
