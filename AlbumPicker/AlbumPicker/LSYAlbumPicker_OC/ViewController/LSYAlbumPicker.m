@@ -10,6 +10,7 @@
 #import "LSYDelegateDataSource.h"
 #import "LSYAlbum.h"
 #import "LSYPickerButtomView.h"
+#import "LSYAssetPreview.h"
 @interface LSYAlbumPicker ()<UICollectionViewDelegate,LSYPickerButtomViewDelegate>
 @property (nonatomic,strong) UICollectionView *albumView;
 @property (nonatomic,strong) LSYDelegateDataSource *albumDelegateDataSource;
@@ -78,7 +79,9 @@
 #pragma mark -LSYPickerButtomViewDelegate
 -(void)previewButtonClick
 {
-    NSLog(@"previewButtonClick");
+    LSYAssetPreview *assetPreview = [[LSYAssetPreview alloc] init];
+    [self.navigationController pushViewController:assetPreview animated:YES];
+    assetPreview.assets = [self getSelectedItems];
 }
 -(void)sendButtonClick
 {
@@ -93,7 +96,14 @@
 {
     self.selectNumbers = (int)collectionView.indexPathsForSelectedItems.count;
 }
-
+-(NSArray *)getSelectedItems
+{
+    NSMutableArray *itemsArray = [NSMutableArray array];
+    for (NSIndexPath *indexPath in _albumView.indexPathsForSelectedItems) {
+        [itemsArray addObject:self.albumAssets[indexPath.row]];
+    }
+    return itemsArray;
+}
 /*
 #pragma mark - Navigation
 

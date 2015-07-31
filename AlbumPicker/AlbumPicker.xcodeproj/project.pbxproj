@@ -18,6 +18,8 @@
 		876F57AB1B622DD0002DC044 /* LSYAlbumCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = 876F57AA1B622DD0002DC044 /* LSYAlbumCatalog.m */; };
 		876F57AE1B622F73002DC044 /* LSYAlbumCatalogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 876F57AD1B622F73002DC044 /* LSYAlbumCatalogCell.m */; };
 		876F57B01B623EB9002DC044 /* 222211817.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 876F57AF1B623EB9002DC044 /* 222211817.jpg */; };
+		87B82BE71B6B20F500B4FC1C /* LSYAssetPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B82BE61B6B20F500B4FC1C /* LSYAssetPreview.m */; };
+		87B82BEA1B6B211C00B4FC1C /* LSYAssetPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B82BE91B6B211C00B4FC1C /* LSYAssetPreviewItem.m */; };
 		87FC6EE61B609B110061BB1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FC6EE51B609B110061BB1F /* main.m */; };
 		87FC6EEC1B609B110061BB1F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FC6EEB1B609B110061BB1F /* ViewController.m */; };
 		87FC6EEF1B609B110061BB1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87FC6EED1B609B110061BB1F /* Main.storyboard */; };
@@ -60,6 +62,10 @@
 		876F57AC1B622F73002DC044 /* LSYAlbumCatalogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSYAlbumCatalogCell.h; path = LSYAlbumPicker_OC/View/LSYAlbumCatalogCell.h; sourceTree = "<group>"; };
 		876F57AD1B622F73002DC044 /* LSYAlbumCatalogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSYAlbumCatalogCell.m; path = LSYAlbumPicker_OC/View/LSYAlbumCatalogCell.m; sourceTree = "<group>"; };
 		876F57AF1B623EB9002DC044 /* 222211817.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 222211817.jpg; sourceTree = "<group>"; };
+		87B82BE51B6B20F500B4FC1C /* LSYAssetPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSYAssetPreview.h; sourceTree = "<group>"; };
+		87B82BE61B6B20F500B4FC1C /* LSYAssetPreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSYAssetPreview.m; sourceTree = "<group>"; };
+		87B82BE81B6B211C00B4FC1C /* LSYAssetPreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSYAssetPreviewItem.h; sourceTree = "<group>"; };
+		87B82BE91B6B211C00B4FC1C /* LSYAssetPreviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSYAssetPreviewItem.m; sourceTree = "<group>"; };
 		87FC6EE01B609B110061BB1F /* AlbumPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlbumPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87FC6EE41B609B110061BB1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87FC6EE51B609B110061BB1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -102,6 +108,8 @@
 				876F57AD1B622F73002DC044 /* LSYAlbumCatalogCell.m */,
 				870212D61B6610EB00047593 /* LSYPickerButtomView.h */,
 				870212D71B6610EB00047593 /* LSYPickerButtomView.m */,
+				87B82BE81B6B211C00B4FC1C /* LSYAssetPreviewItem.h */,
+				87B82BE91B6B211C00B4FC1C /* LSYAssetPreviewItem.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -204,6 +212,8 @@
 				876F578D1B62259B002DC044 /* LSYAlbumPicker.m */,
 				876F57A91B622DD0002DC044 /* LSYAlbumCatalog.h */,
 				876F57AA1B622DD0002DC044 /* LSYAlbumCatalog.m */,
+				87B82BE51B6B20F500B4FC1C /* LSYAssetPreview.h */,
+				87B82BE61B6B20F500B4FC1C /* LSYAssetPreview.m */,
 				876F579F1B6229D3002DC044 /* LSYNavigationController.h */,
 				876F57A01B6229D3002DC044 /* LSYNavigationController.m */,
 			);
@@ -329,10 +339,12 @@
 				87FC6EEC1B609B110061BB1F /* ViewController.m in Sources */,
 				876F57AB1B622DD0002DC044 /* LSYAlbumCatalog.m in Sources */,
 				876F57AE1B622F73002DC044 /* LSYAlbumCatalogCell.m in Sources */,
+				87B82BE71B6B20F500B4FC1C /* LSYAssetPreview.m in Sources */,
 				876F57911B6225E5002DC044 /* LSYAlbumCell.m in Sources */,
 				876F57961B622621002DC044 /* LSYAlbum.m in Sources */,
 				876F57971B622621002DC044 /* LSYDelegateDataSource.m in Sources */,
 				87FC6EE61B609B110061BB1F /* main.m in Sources */,
+				87B82BEA1B6B211C00B4FC1C /* LSYAssetPreviewItem.m in Sources */,
 				876F579B1B6226BD002DC044 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
