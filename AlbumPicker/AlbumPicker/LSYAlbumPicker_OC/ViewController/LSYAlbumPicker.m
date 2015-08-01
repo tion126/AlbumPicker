@@ -49,7 +49,7 @@
 -(LSYPickerButtomView *)pickerButtomView
 {
     if (!_pickerButtomView) {
-        _pickerButtomView = [[LSYPickerButtomView alloc] initWithFrame:CGRectMake(0, ViewSize(self.view).height-40, ViewSize(self.view).width, 40)];
+        _pickerButtomView = [[LSYPickerButtomView alloc] initWithFrame:CGRectMake(0, ViewSize(self.view).height-44, ViewSize(self.view).width, 44)];
         _pickerButtomView.delegate = self;
         [_pickerButtomView setSendNumber:self.selectNumbers];
     }
@@ -82,6 +82,7 @@
     LSYAssetPreview *assetPreview = [[LSYAssetPreview alloc] init];
     [self.navigationController pushViewController:assetPreview animated:YES];
     assetPreview.assets = [self getSelectedItems];
+    assetPreview.AlbumCollection = self.albumView;
 }
 -(void)sendButtonClick
 {

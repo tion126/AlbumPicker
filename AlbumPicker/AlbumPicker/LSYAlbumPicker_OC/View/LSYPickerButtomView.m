@@ -123,7 +123,7 @@
 {
     if (!_numbersView) {
         _numbersView = [[UIView alloc] init];
-        [_numbersView setFrame:CGRectMake(0, 10, 20, 20)];
+        [_numbersView setFrame:CGRectMake(0, 12, 20, 20)];
         [_numbersView setBackgroundColor:[UIColor colorWithRed:9/255.0 green:187/255.0 blue:7/255.0 alpha:1]];
         [_numbersView.layer setCornerRadius:10];
         [_numbersView setClipsToBounds:YES];
@@ -168,7 +168,7 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    [self.numbersLabel setFrame:CGRectMake(0,10, 20, 20)];
+    [self.numbersLabel setFrame:CGRectMake(0,12, 20, 20)];
     
 }
 @end

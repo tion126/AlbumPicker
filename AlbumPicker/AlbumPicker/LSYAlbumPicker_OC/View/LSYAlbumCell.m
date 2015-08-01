@@ -36,15 +36,15 @@
     }
     return _statusView;
 }
--(void)setAsset:(ALAsset *)asset
+-(void)setModel:(LSYAlbumModel *)model
 {
-    _asset = asset;
-    _imageView.image = [UIImage imageWithCGImage:asset.thumbnail];
+    _model = model;
+    _imageView.image = [UIImage imageWithCGImage:model.asset.thumbnail];
 }
-
 -(void)setSelected:(BOOL)selected
 {
     [super setSelected:selected];
+    _model.isSelect = selected;
     if (selected) {
         [self.statusView setImage:[UIImage imageNamed:@"AlbumPicker.bundle/FriendsSendsPicturesSelectYIcon@2x"]];
         [UIView animateWithDuration:0.15 delay:0.0 options:UIViewAnimationOptionCurveEaseIn|UIViewAnimationOptionAllowUserInteraction animations:^{

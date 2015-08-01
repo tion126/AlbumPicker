@@ -26,7 +26,9 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     LSYAlbumCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kAlbumCellIdentifer forIndexPath:indexPath];
-    cell.asset = self.albumDataArray[indexPath.row];
+    LSYAlbumModel *model = self.albumDataArray[indexPath.row];
+    model.indexPath = indexPath;
+    cell.model = model;
     return cell;
 }
 

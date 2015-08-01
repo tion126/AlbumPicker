@@ -10,4 +10,5 @@
 
 @interface LSYAssetPreview : UIViewController
 @property (nonatomic,strong) NSArray *assets;
+@property (nonatomic,strong) UICollectionView *AlbumCollection;
 @end

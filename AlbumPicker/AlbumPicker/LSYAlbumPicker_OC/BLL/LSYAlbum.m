@@ -7,6 +7,7 @@
 //
 
 #import "LSYAlbum.h"
+#import "LSYAlbumModel.h"
 @interface LSYAlbum ()
 
 @end
@@ -65,8 +66,9 @@
     NSInteger assetCount = [group numberOfAssets];
     ALAssetsGroupEnumerationResultsBlock resultBlock = ^(ALAsset *asset, NSUInteger index, BOOL *stop) {
         if (asset) {
-            [assets addObject:asset];
-            NSString *assetType = [asset valueForProperty:ALAssetPropertyType];
+            LSYAlbumModel *model = [[LSYAlbumModel alloc] initAlbumModel:asset];
+            [assets addObject:model];
+            NSString *assetType = [model.asset valueForProperty:ALAssetPropertyType];
             if ([assetType isEqualToString:ALAssetTypePhoto]) {
                 
             }

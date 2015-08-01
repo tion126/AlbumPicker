@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "LSYAlbumModel.h"
 @interface LSYAlbumCell : UICollectionViewCell
-@property (nonatomic,strong) ALAsset *asset;
+@property (nonatomic,strong) LSYAlbumModel *model;
 @end
