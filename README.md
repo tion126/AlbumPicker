@@ -2,5 +2,5 @@ AlbumPicker
 ===
 使用介绍
 ----
-nihap<br>
+  nihap<br>
 hah
