@@ -100,6 +100,9 @@
 }
 -(void)selectButtonClick:(UIButton *)selectButton
 {
+    if (self.previewScrollView.isDecelerating) {
+        return;
+    }
     int assetNumber = self.previewScrollView.contentOffset.x/ViewSize(self.view).width;
     LSYAlbumModel *model = self.assets[assetNumber];
     model.isSelect = !model.isSelect;
@@ -112,7 +115,7 @@
     else
     {
         [self.AlbumCollection deselectItemAtIndexPath:model.indexPath animated:NO];
-        [self.selectedAssets removeObjectAtIndex:assetNumber];
+        [self.selectedAssets removeObject:model];
         [self.AlbumCollection.delegate collectionView:self.AlbumCollection didDeselectItemAtIndexPath:model.indexPath];
     }
     [self.previewToolBar setSendNumber:(int)self.AlbumCollection.indexPathsForSelectedItems.count];
