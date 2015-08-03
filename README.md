@@ -1,5 +1,5 @@
 AlbumPicker
 ===
-使用介绍
+###　　　　　　　　　　　　Author:Jelly
 ---
 [helo,lsy](http://www.baidu.com "baidu")
