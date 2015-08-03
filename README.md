@@ -2,4 +2,4 @@ AlbumPicker
 ===
 使用介绍
 ---
-helo,aadasd,asdasdasdasddsf asdasdasd
+helo,lsy(http//www.baidu.com"baidu")
