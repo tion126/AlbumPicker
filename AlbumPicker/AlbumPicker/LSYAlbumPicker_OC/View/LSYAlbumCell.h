@@ -11,3 +11,7 @@
 @interface LSYAlbumCell : UICollectionViewCell
 @property (nonatomic,strong) LSYAlbumModel *model;
 @end
+
+@interface LSYAlbumCellBottomView : UIView
+@property (nonatomic) double interval;
+@end

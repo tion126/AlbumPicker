@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol LSYAlbumPickerDelegate<NSObject>
+-(void)AlbumPickerDidFinishPick:(NSArray *)assets;
+@end
 @interface LSYAlbumPicker : UIViewController
 @property (nonatomic,strong) ALAssetsGroup *group;
+@property (nonatomic) NSInteger maxminumNumber;
+@property (nonatomic,weak) id<LSYAlbumPickerDelegate>delegate;
+-(void)sendButtonClick;
 @end

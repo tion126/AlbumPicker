@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol LSYAssetPreviewItemDelegate <NSObject>
+-(void)hiddenBarControl;
+@end
 @interface LSYAssetPreviewItem : UIView
 @property (nonatomic,strong) ALAsset *asset;
+@property (nonatomic,weak) id<LSYAssetPreviewItemDelegate>delegate;
 @end

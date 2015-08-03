@@ -21,4 +21,5 @@
 
 @interface LSYAssetPreviewToolBar : UIView
 @property (nonatomic,weak) id <LSYAssetPreviewToolBarDelegate> delegate;
+-(void)setSendNumber:(int)number;
 @end

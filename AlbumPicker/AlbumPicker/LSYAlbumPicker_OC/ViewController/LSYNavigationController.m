@@ -18,7 +18,6 @@
 {
     self = [super initWithRootViewController:rootViewController];
     if (self) {
-        ((LSYAlbumCatalog *)rootViewController).isFirstEnter = YES;
     }
     return self;
 }

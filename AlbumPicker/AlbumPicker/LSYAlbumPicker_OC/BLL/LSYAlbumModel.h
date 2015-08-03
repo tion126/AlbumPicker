@@ -11,6 +11,7 @@
 @interface LSYAlbumModel : NSObject
 @property (nonatomic,strong) ALAsset *asset;
 @property (nonatomic,strong) NSIndexPath *indexPath;
+@property (nonatomic,strong,readonly) NSString *assetType;
 @property (nonatomic) BOOL isSelect;
 +(instancetype)AlbumModel:(ALAsset *)asset;
 -(instancetype)initAlbumModel:(ALAsset *)asset;

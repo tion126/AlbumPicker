@@ -7,10 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "LSYAlbumPicker.h"
 #import "LSYNavigationController.h"
 #import "LSYAlbumCatalog.h"
-@interface ViewController ()
+@interface ViewController ()<LSYAlbumCatalogDelegate>
 
 @end
 
@@ -23,12 +22,18 @@
  
 }
 - (IBAction)enterAlbum:(id)sender {
-    LSYNavigationController *navigation = [[LSYNavigationController alloc] initWithRootViewController:[[LSYAlbumCatalog alloc] init]];
+    LSYAlbumCatalog *albumCatalog = [[LSYAlbumCatalog alloc] init];
+    albumCatalog.delegate = self;
+    LSYNavigationController *navigation = [[LSYNavigationController alloc] initWithRootViewController:albumCatalog];
+    albumCatalog.maximumNumberOfSelectionMedia = 5;
     [self presentViewController:navigation animated:YES completion:^{
         
     }];
 }
-
+-(void)AlbumDidFinishPick:(NSArray *)assets
+{
+    NSLog(@"%@",assets);
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

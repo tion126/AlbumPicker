@@ -31,6 +31,7 @@
             NSInteger groupType = [[group valueForProperty:ALAssetsGroupPropertyType] integerValue];
             if (groupType == ALAssetsGroupSavedPhotos) {
                 [groups insertObject:group atIndex:0];
+                
             }
             else
             {
@@ -38,6 +39,7 @@
                     [groups addObject:group];
                 }
             }
+           
         }
         else
         {

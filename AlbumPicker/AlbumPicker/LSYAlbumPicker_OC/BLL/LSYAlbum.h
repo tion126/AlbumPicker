@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
 typedef void (^albumGroupsBlock)(NSMutableArray *groups);
 typedef void (^albumAssetsBlock)(NSMutableArray *assets);
 @interface LSYAlbum : NSObject

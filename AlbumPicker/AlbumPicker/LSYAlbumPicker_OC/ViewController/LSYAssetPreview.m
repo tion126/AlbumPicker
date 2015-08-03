@@ -10,10 +10,11 @@
 #import "LSYAssetPreviewView.h"
 #import "LSYAssetPreviewItem.h"
 #import "LSYAlbumModel.h"
-@interface LSYAssetPreview ()<UIScrollViewDelegate,LSYAssetPreviewNavBarDelegate,LSYAssetPreviewToolBarDelegate>
+@interface LSYAssetPreview ()<UIScrollViewDelegate,LSYAssetPreviewNavBarDelegate,LSYAssetPreviewToolBarDelegate,LSYAssetPreviewItemDelegate>
 @property (nonatomic,strong)UIScrollView *previewScrollView;
 @property (nonatomic,strong) LSYAssetPreviewNavBar *previewNavBar;
 @property (nonatomic,strong) LSYAssetPreviewToolBar *previewToolBar;
+@property (nonatomic,strong) NSMutableArray *selectedAssets;
 @end
 
 @implementation LSYAssetPreview
@@ -23,6 +24,7 @@
     // Do any additional setup after loading the view.
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     [self prefersStatusBarHidden];
+    self.selectedAssets = [NSMutableArray arrayWithArray:self.assets];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self.view addSubview:self.previewScrollView];
     [self.view addSubview:self.previewToolBar];
@@ -57,9 +59,11 @@
         _previewToolBar = [[LSYAssetPreviewToolBar alloc] init];
         [_previewToolBar setBackgroundColor:[UIColor colorWithRed:19/255.0 green:19/255.0 blue:19/255.0 alpha:0.75]];
         _previewToolBar.delegate = self;
+        [_previewToolBar setSendNumber:(int)self.AlbumCollection.indexPathsForSelectedItems.count];
     }
     return _previewToolBar;
 }
+
 -(BOOL)prefersStatusBarHidden
 {
     return YES;
@@ -69,6 +73,7 @@
     [self.previewScrollView setContentSize:CGSizeMake(ScreenSize.width*self.assets.count, ScreenSize.height)];
     for (int i = 0; i<_assets.count; i++) {
         LSYAssetPreviewItem *previewItem = [[LSYAssetPreviewItem alloc] initWithFrame:CGRectMake(ScreenSize.width*i, 0, ScreenSize.width, ScreenSize.height)];
+        previewItem.delegate = self;
         LSYAlbumModel *model = _assets[i];
         previewItem.asset = model.asset;
         [self.previewScrollView addSubview:previewItem];
@@ -81,6 +86,12 @@
     LSYAlbumModel *model = self.assets[assetNumber];
     self.previewNavBar.selectButton.selected = model.isSelect;
     
+}
+#pragma mark -LSYAssetPreviewItemDelegate
+-(void)hiddenBarControl
+{
+    _previewNavBar.hidden = !_previewNavBar.hidden;
+    _previewToolBar.hidden = !_previewToolBar.hidden;
 }
 #pragma mark -LSYAssetPreviewNavBarDelegate
 -(void)backButtonClick:(UIButton *)backButton
@@ -95,16 +106,27 @@
     self.previewNavBar.selectButton.selected = model.isSelect;
     if (model.isSelect) {
         [self.AlbumCollection selectItemAtIndexPath:model.indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+        [self.selectedAssets addObject:model];
+        [self.AlbumCollection.delegate collectionView:self.AlbumCollection didSelectItemAtIndexPath:model.indexPath];
     }
     else
     {
         [self.AlbumCollection deselectItemAtIndexPath:model.indexPath animated:NO];
+        [self.selectedAssets removeObjectAtIndex:assetNumber];
+        [self.AlbumCollection.delegate collectionView:self.AlbumCollection didDeselectItemAtIndexPath:model.indexPath];
     }
+    [self.previewToolBar setSendNumber:(int)self.AlbumCollection.indexPathsForSelectedItems.count];
 }
 #pragma mark -LSYAssetPreviewToolBarDelegate
 -(void)sendButtonClick:(UIButton *)sendButton
 {
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(AssetPreviewDidFinishPick:)]) {
+        NSMutableArray *assets = [NSMutableArray array];
+        for (LSYAlbumModel *model in self.selectedAssets) {
+            [assets addObject:model.asset];
+        }
+        [self.delegate AssetPreviewDidFinishPick:assets];
+    }
 }
 -(void)viewWillDisappear:(BOOL)animated
 {

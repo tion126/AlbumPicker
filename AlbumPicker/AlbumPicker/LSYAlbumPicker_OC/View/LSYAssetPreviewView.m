@@ -130,6 +130,10 @@
     }
     
 }
+-(void)setSendNumber:(int)number
+{
+    [self.sendButton setSendNumber:number];
+}
 -(void)layoutSubviews
 {
     [super layoutSubviews];

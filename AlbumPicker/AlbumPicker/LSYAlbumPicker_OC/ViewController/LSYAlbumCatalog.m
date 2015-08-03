@@ -9,7 +9,7 @@
 #import "LSYAlbumCatalog.h"
 #import "LSYDelegateDataSource.h"
 #import "LSYAlbumPicker.h"
-@interface LSYAlbumCatalog ()<UITableViewDelegate>
+@interface LSYAlbumCatalog ()<UITableViewDelegate,LSYAlbumPickerDelegate>
 @property (nonatomic,strong) UITableView *albumTabView;
 @property (nonatomic,strong) LSYDelegateDataSource *albumDelegateDataSource;
 @property (nonatomic,strong) NSMutableArray *dataArray;
@@ -20,19 +20,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"照片";
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:self.albumTabView];
     [[LSYAlbum sharedAlbum] setupAlbumGroups:^(NSMutableArray *groups) {
         self.dataArray = groups;
         self.albumDelegateDataSource.albumCatalogDataArray = groups;
         [self.albumTabView reloadData];
-        if (self.isFirstEnter) {
-            LSYAlbumPicker *albumPicker = [[LSYAlbumPicker alloc] init];
-            albumPicker.group = [self.dataArray firstObject];
-            [self.navigationController pushViewController:albumPicker animated:NO];
-        }
     }];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(backMainView)];
     
+}
+-(void)backMainView
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 -(UITableView *)albumTabView
 {
@@ -52,6 +55,13 @@
     }
     return _albumDelegateDataSource;
 }
+#pragma mark -LSYAlbumPickerDelegate
+-(void)AlbumPickerDidFinishPick:(NSArray *)assets
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(AlbumDidFinishPick:)]) {
+        [self.delegate AlbumDidFinishPick:assets];
+    }
+}
 #pragma mark -UITabViewDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -59,6 +69,12 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     LSYAlbumPicker *albumPicker = [[LSYAlbumPicker alloc] init];
     albumPicker.group = self.dataArray[indexPath.row];
+    albumPicker.delegate = self;
+    if (self.maximumNumberOfSelectionPhoto) {
+        albumPicker.maxminumNumber = self.maximumNumberOfSelectionPhoto;
+    }else if(self.maximumNumberOfSelectionMedia){
+        albumPicker.maxminumNumber = self.maximumNumberOfSelectionMedia;
+    }
     [self.navigationController pushViewController:albumPicker animated:YES];
 }
 - (void)didReceiveMemoryWarning {
@@ -66,6 +82,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -
+-(void)setMaximumNumberOfSelectionMedia:(NSInteger)maximumNumberOfSelectionMedia
+{
+    _maximumNumberOfSelectionMedia = maximumNumberOfSelectionMedia;
+    [LSYAlbum sharedAlbum].assstsFilter = [ALAssetsFilter allAssets];
+}
+-(void)setMaximumNumberOfSelectionPhoto:(NSInteger)maximumNumberOfSelectionPhoto
+{
+    _maximumNumberOfSelectionPhoto = maximumNumberOfSelectionPhoto;
+    [LSYAlbum sharedAlbum].assstsFilter = [ALAssetsFilter allPhotos];
+}
 /*
 #pragma mark - Navigation
 

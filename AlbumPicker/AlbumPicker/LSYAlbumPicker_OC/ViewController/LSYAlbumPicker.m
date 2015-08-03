@@ -11,11 +11,13 @@
 #import "LSYAlbum.h"
 #import "LSYPickerButtomView.h"
 #import "LSYAssetPreview.h"
-@interface LSYAlbumPicker ()<UICollectionViewDelegate,LSYPickerButtomViewDelegate>
+@interface LSYAlbumPicker ()<UICollectionViewDelegate,LSYPickerButtomViewDelegate,LSYAssetPreviewDelegate>
 @property (nonatomic,strong) UICollectionView *albumView;
 @property (nonatomic,strong) LSYDelegateDataSource *albumDelegateDataSource;
 @property (nonatomic,strong) NSMutableArray *albumAssets;
 @property (nonatomic,strong) LSYPickerButtomView *pickerButtomView;
+@property (nonatomic,strong) NSMutableArray *assetsSort;
+@property (nonatomic,strong) NSMutableArray *selectedAssets;
 @property (nonatomic)int selectNumbers;
 @end
 
@@ -57,6 +59,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = [self.group valueForProperty:ALAssetsGroupPropertyName];
+    self.assetsSort = [NSMutableArray array];
     [self.view addSubview:self.albumView];
     [self.view addSubview:self.pickerButtomView];
     [[LSYAlbum sharedAlbum] setupAlbumAssets:self.group withAssets:^(NSMutableArray *assets) {
@@ -75,35 +79,74 @@
 {
     [super viewDidLayoutSubviews];
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.selectNumbers = (int)self.albumView.indexPathsForSelectedItems.count;
+}
 #pragma mark -LSYPickerButtomViewDelegate
 -(void)previewButtonClick
 {
     LSYAssetPreview *assetPreview = [[LSYAssetPreview alloc] init];
     [self.navigationController pushViewController:assetPreview animated:YES];
-    assetPreview.assets = [self getSelectedItems];
+    assetPreview.assets = self.selectedAssets;
     assetPreview.AlbumCollection = self.albumView;
+    assetPreview.delegate = self;
 }
 -(void)sendButtonClick
 {
-    NSLog(@"sendButtonClick");
+    if (self.delegate && [self.delegate respondsToSelector:@selector(AlbumPickerDidFinishPick:)]) {
+        NSMutableArray *assets = [NSMutableArray array];
+        for (LSYAlbumModel *model in self.selectedAssets) {
+            [assets addObject:model.asset];
+        }
+        [self.delegate AlbumPickerDidFinishPick:assets];
+    }
+    
+}
+#pragma mark -LSYAssetPreviewDelegate
+-(void)AssetPreviewDidFinishPick:(NSArray *)assets
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(AlbumPickerDidFinishPick:)]){
+        [self.delegate AlbumPickerDidFinishPick:assets];
+    }
 }
 #pragma mark -UICollectionViewDelegate
+-(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.maxminumNumber) {
+        if (!(self.maxminumNumber>collectionView.indexPathsForSelectedItems.count)) {
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"最多只能选%d张照片",(int)self.maxminumNumber] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+            return NO;
+        }
+        return YES;
+    }
+    else
+        return YES;
+}
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectNumbers = (int)collectionView.indexPathsForSelectedItems.count;
+    [self.assetsSort addObject:indexPath];
 }
 -(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectNumbers = (int)collectionView.indexPathsForSelectedItems.count;
+    [self.assetsSort removeObject:indexPath];
 }
--(NSArray *)getSelectedItems
+-(NSMutableArray *)selectedAssets
 {
-    NSMutableArray *itemsArray = [NSMutableArray array];
-    for (NSIndexPath *indexPath in _albumView.indexPathsForSelectedItems) {
-        [itemsArray addObject:self.albumAssets[indexPath.row]];
+    if (!_selectedAssets) {
+        _selectedAssets = [NSMutableArray array];
+       
     }
-    return itemsArray;
+    [_selectedAssets removeAllObjects];
+    for (NSIndexPath *indexPath in self.assetsSort) {
+        [_selectedAssets addObject:self.albumAssets[indexPath.item]];
+    }
+    return _selectedAssets;
 }
 /*
 #pragma mark - Navigation

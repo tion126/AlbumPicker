@@ -30,8 +30,15 @@
 }
 -(void)initAssetPreViewItem
 {
+    [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hiddenBar)]];
     [self addSubview:self.previewScrollView];
     [self.previewScrollView addSubview:self.assetImageView];
+}
+-(void)hiddenBar
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(hiddenBarControl)]) {
+        [self.delegate hiddenBarControl];
+    }
 }
 -(UIScrollView *)previewScrollView
 {
@@ -39,8 +46,8 @@
         _previewScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 0, ScreenSize.width-20, ScreenSize.height)];
         _previewScrollView.center = CGPointMake(_previewScrollView.center.x, CGRectGetMidY(self.frame));
         [_previewScrollView setDelegate:self];
-        [_previewScrollView setShowsVerticalScrollIndicator:YES];
-        [_previewScrollView setShowsHorizontalScrollIndicator:YES];
+        [_previewScrollView setShowsVerticalScrollIndicator:NO];
+        [_previewScrollView setShowsHorizontalScrollIndicator:NO];
         [_previewScrollView setMinimumZoomScale:1.0];
         [_previewScrollView setMaximumZoomScale:2.0];
     }

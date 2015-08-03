@@ -144,11 +144,11 @@
 {
     if (number == 0) {
         [self setEnabled:NO];
-        [self.numbersView setHidden:YES];
+        [self isHiddenNumber:YES];
     }
     else{
         [self setEnabled:YES];
-        [self.numbersView setHidden:NO];
+        [self isHiddenNumber:NO];
     }
     self.numbersLabel.text = [NSString stringWithFormat:@"%d",number];
     [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseIn|UIViewAnimationOptionAllowUserInteraction animations:^{
@@ -164,6 +164,11 @@
             }];
         }];
     }];
+}
+-(void)isHiddenNumber:(BOOL)hidden
+{
+    [self.numbersView setHidden:hidden];
+    [self.numbersLabel setHidden:hidden];
 }
 -(void)layoutSubviews
 {

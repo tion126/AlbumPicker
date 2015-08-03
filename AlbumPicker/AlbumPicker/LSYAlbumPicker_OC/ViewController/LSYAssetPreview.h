@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol LSYAssetPreviewDelegate <NSObject>
+-(void)AssetPreviewDidFinishPick:(NSArray *)assets;
+@end
 @interface LSYAssetPreview : UIViewController
 @property (nonatomic,strong) NSArray *assets;
 @property (nonatomic,strong) UICollectionView *AlbumCollection;
+@property (nonatomic,weak) id <LSYAssetPreviewDelegate> delegate;
 @end
