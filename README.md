@@ -8,3 +8,7 @@ AlbumPicker
 预览照片：<br>
 ![](https://github.com/GGGHub/AlbumPicker/raw/master/AlbumPicker/Preview.gif "预览照片")<br>
 
+-----
+**关于AlbumPicker：**
+* hahah
+
