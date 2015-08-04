@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>89B93705-EBC5-4122-8FF3-B773C85149E8</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>AlbumPicker</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>A5BB169AADD5C67BDC17738161944B26C698A1F3</key>
 		<string>github.com:GGGHub/AlbumPicker.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>AlbumPicker/AlbumPicker.xcodeproj/project.xcworkspace</string>
+	<string>AlbumPicker/AlbumPicker.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>A5BB169AADD5C67BDC17738161944B26C698A1F3</key>
