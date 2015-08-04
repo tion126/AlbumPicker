@@ -24,6 +24,11 @@ _正在开发中_
 
 ## 使用
 ### Objective-C
+#### 导入头文件
+
+``` objective-c
+#import "LSYAlbumCatalog.h"
+```
 
 ### Swift
 *正在开发中*
