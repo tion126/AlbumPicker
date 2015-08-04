@@ -29,6 +29,11 @@ _正在开发中_
 ``` objective-c
 #import "LSYAlbumCatalog.h"
 ```
+在该项目里用的是自定义的导航栏，可以根据项目的要求而更改导航栏。所以在该项目里导入了两个头文件
 
+``` objective-c
+#import "LSYAlbumCatalog.h"
+#import "LSYNavigationController.h"
+```
 ### Swift
 *正在开发中*
