@@ -4,4 +4,4 @@ AlbumPicker
 
 -----
 效果图：<br>
-![](https://github.com/GGGHub/AlbumPicker/raw/master/AlbumPicker/AlbumPicker.gif)
+![](https://github.com/GGGHub/AlbumPicker/raw/master/AlbumPicker/AlbumPicker.gif "选择照片") ![](https://github.com/GGGHub/AlbumPicker/raw/master/AlbumPicker/Preview.gif "预览照片")
