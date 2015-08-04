@@ -20,4 +20,4 @@ AlbumPicker
 2. 由于项目中用到很多宏定义，所以需要把`AlbumPicker-prefix.pch`里面自定义宏拷贝到其他项目中的`.pch`文件中
 
 ### Swift
-__正在开发中__
+_正在开发中_
