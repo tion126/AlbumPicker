@@ -15,3 +15,7 @@ AlbumPicker
 * 根据要求限制选取资源的最大数量，默认没有限制
 
 ## 安装
+### Objective-c
+* asdadas
+### Swift
+* sdasdad
