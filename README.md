@@ -16,7 +16,7 @@ AlbumPicker
 
 ## 安装
 ### Objective-c
-* asdadas
+1. 把项目里的`LSYAlbumPicker_OC`文件及里面的所有文件拷贝到其他项目中
 
 ### Swift
 * sdasdad
