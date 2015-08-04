@@ -10,7 +10,7 @@ AlbumPicker
 
 -----
 **关于AlbumPicker：**
-* Swift与Objective-C两个版本
+* 分别用Swift与Objective-C编写两个版本
 * 可以选择相册里面的所有资源，也可以只设置选择图片
 * 根据要求限制选取资源的最大数量，默认没有限制
 
