@@ -50,4 +50,31 @@ LSYAlbumCatalog *albumCatalog = [[LSYAlbumCatalog alloc] init];
 #### Swift
 _正在开发中_
 
+### 代理实现
+#### Objective-C 
+实现`LSYAlbumCatalogDelegate`的方法
 
+``` objective-c
+-(void)AlbumDidFinishPick:(NSArray *)assets
+{
+    
+}
+```
+其中`assets`是`ALAsset`类型的数组表示返回的所选资源
+#### Swift
+_正在开发中_
+
+### 选择资源种类
+#### Objective-C
+选择相册中的所有资源，并且设置最多选择的数量
+``` objective-c
+    LSYAlbumCatalog *albumCatalog = [[LSYAlbumCatalog alloc] init];
+    albumCatalog.maximumNumberOfSelectionMedia = 5;
+```
+只选择相册中的相片，并且设置最多选择的数量
+``` objective-c
+    LSYAlbumCatalog *albumCatalog = [[LSYAlbumCatalog alloc] init];
+    albumCatalog.maximumNumberOfSelectionPhoto = 5;
+```
+#### Swift
+_正在开发中_
