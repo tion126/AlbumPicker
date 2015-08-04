@@ -4,3 +4,4 @@ AlbumPicker
 
 -----
 效果图：<br>
+![](https://github.com/GGGHub/AlbumPicker/raw/AlbumPicker/AlbumPicker.gif)
