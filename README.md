@@ -17,5 +17,6 @@ AlbumPicker
 ## 安装
 ### Objective-c
 * asdadas
+
 ### Swift
 * sdasdad
