@@ -17,6 +17,7 @@ AlbumPicker
 ## 安装
 ### Objective-c
 1. 把项目里的`LSYAlbumPicker_OC`文件及里面的所有文件拷贝到其他项目中
+2. 由于项目中用到很多宏定义，所以需要把`AlbumPicker-prefix.pch`里面自定义宏拷贝到其他项目中的`pch`文件中
 
 ### Swift
 * sdasdad
