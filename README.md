@@ -23,17 +23,31 @@ AlbumPicker
 _正在开发中_
 
 ## 使用
-### Objective-C
-#### 导入头文件
+### 导入头文件
+#### Objective-C
 
 ``` objective-c
 #import "LSYAlbumCatalog.h"
 ```
-在该项目里用的是自定义的导航栏，可以根据项目的要求而更改导航栏。所以在该项目里导入了两个头文件
+在该项目里用的是自定义的导航栏，可以根据项目的需求来改变导航栏样式。所以在该项目里导入了两个头文件
 
 ``` objective-c
 #import "LSYAlbumCatalog.h"
 #import "LSYNavigationController.h"
 ```
-### Swift
+#### Swift
 *正在开发中*
+### 打开相册
+#### Objective-C
+
+``` objective-c
+LSYAlbumCatalog *albumCatalog = [[LSYAlbumCatalog alloc] init];
+    albumCatalog.delegate = self;
+    LSYNavigationController *navigation = [[LSYNavigationController alloc] initWithRootViewController:albumCatalog];
+    [self presentViewController:navigation animated:YES completion:^{
+    }];
+```
+#### Swift
+_正在开发中_
+
+
