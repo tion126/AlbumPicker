@@ -43,8 +43,8 @@
 
 /* Begin PBXFileReference section */
 		870212D41B65C23A00047593 /* AlbumPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlbumPicker.bundle; sourceTree = "<group>"; };
+		8738396F1B709168002C4AE8 /* LSYConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LSYConfig.h; path = LSYAlbumPicker_OC/LSYConfig.h; sourceTree = "<group>"; };
 		876F57811B61EC27002DC044 /* AlbumPicker-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AlbumPicker-prefix.pch"; sourceTree = "<group>"; };
-		876F57821B61EEAE002DC044 /* LSYConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSYConfig.h; sourceTree = "<group>"; };
 		876F578C1B62259B002DC044 /* LSYAlbumPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSYAlbumPicker.h; path = LSYAlbumPicker_OC/ViewController/LSYAlbumPicker.h; sourceTree = "<group>"; };
 		876F578D1B62259B002DC044 /* LSYAlbumPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSYAlbumPicker.m; path = LSYAlbumPicker_OC/ViewController/LSYAlbumPicker.m; sourceTree = "<group>"; };
 		876F578F1B6225E5002DC044 /* LSYAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSYAlbumCell.h; path = LSYAlbumPicker_OC/View/LSYAlbumCell.h; sourceTree = "<group>"; };
@@ -158,7 +158,6 @@
 				87FC6EEA1B609B110061BB1F /* ViewController.h */,
 				87FC6EEB1B609B110061BB1F /* ViewController.m */,
 				87FC6EED1B609B110061BB1F /* Main.storyboard */,
-				876F57821B61EEAE002DC044 /* LSYConfig.h */,
 				876F57811B61EC27002DC044 /* AlbumPicker-prefix.pch */,
 				87FC6EF01B609B110061BB1F /* Images.xcassets */,
 				87FC6EE31B609B110061BB1F /* Supporting Files */,
@@ -199,6 +198,7 @@
 		87FC6F091B609B370061BB1F /* LSYAlbumPicker_OC */ = {
 			isa = PBXGroup;
 			children = (
+				8738396F1B709168002C4AE8 /* LSYConfig.h */,
 				876F57861B620F10002DC044 /* View */,
 				87FC6F141B60F0530061BB1F /* BLL */,
 				87FC6F131B60EEC40061BB1F /* ViewController */,

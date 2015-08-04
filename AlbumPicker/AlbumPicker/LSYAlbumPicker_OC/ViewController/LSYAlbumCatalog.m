@@ -60,6 +60,7 @@
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(AlbumDidFinishPick:)]) {
         [self.delegate AlbumDidFinishPick:assets];
+        [self backMainView];
     }
 }
 #pragma mark -UITabViewDelegate
