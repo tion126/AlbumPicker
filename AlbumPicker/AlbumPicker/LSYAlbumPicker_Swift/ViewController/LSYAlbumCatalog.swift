@@ -15,6 +15,8 @@ protocol LSYAlbumCatalogDelegate:class {
     func AlbumDidFinishPick(assets:NSArray)->Void
 }
 class LSYAlbumCatalog:UIViewController {
+    let kAlbumCatalogCellIdentifer:String = "albumCatalogCellIdentifer"
+    
     var maximumNumberOfSelectionPhoto:Int = 0{
         didSet{
             LSYAlbum.sharedAlbum().assetsFilter = ALAssetsFilter.allPhotos()
@@ -27,7 +29,7 @@ class LSYAlbumCatalog:UIViewController {
     }
     
     weak var delegate:LSYAlbumCatalogDelegate!
-    private var dataArray:NSMutableArray!
+    var dataArray:NSMutableArray!
     private var albumTabView:UITableView!{
         didSet{
             albumTabView.delegate = self

@@ -92,7 +92,6 @@
     self.statusView.frame = CGRectMake(ViewSize(self).width-30, 0, 30, 30);
     self.bottomView.frame = CGRectMake(0, ViewSize(self).height-20, ViewSize(self).width, 20);
 }
-
 @end
 /**
  Video Tag
