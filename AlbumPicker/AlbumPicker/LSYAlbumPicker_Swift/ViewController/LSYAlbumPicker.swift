@@ -19,9 +19,31 @@ class LSYAlbumPicker: UIViewController {
     var group:ALAssetsGroup!
     var maxminumNumber:Int = 0
     weak var delegate:LSYAlbumPickerDelegate!
+    
     var albumAssets:NSMutableArray!
     var assetsSort:NSMutableArray!
-    var selectedAssetsZ:NSMutableArray!
+    var selectedAssets:NSMutableArray!{
+        get{
+            var selectArray = NSMutableArray()
+            var index:NSIndexPath!
+            for index in self.assetsSort{
+                selectArray.addObject(self.albumAssets[index.item])
+            }
+            return selectArray;
+        }
+    }
+    var selectNumber:Int = 0 {
+        didSet{
+            self.pickerButtomView.setSendNumber(selectNumber)
+        }
+    }
+    var pickerButtomView:LSYPickerButtomView!{
+        didSet{
+            pickerButtomView.delegate = self
+            pickerButtomView.setSendNumber(self.selectNumber)
+            self.view.addSubview(pickerButtomView)
+        }
+    }
     var flowLayout:UICollectionViewFlowLayout!{
         didSet{
             flowLayout.itemSize = CGSizeMake(self.kThumbnailLength, self.kThumbnailLength)
@@ -37,9 +59,25 @@ class LSYAlbumPicker: UIViewController {
             albumView.dataSource = self
             albumView.backgroundColor = UIColor.whiteColor()
             albumView.alwaysBounceVertical = true
+            self.view.addSubview(albumView)
         }
     }
     private func setup(){
-        
+        self.title = self.group.valueForProperty(ALAssetsGroupPropertyName) as? String
+        self.assetsSort = NSMutableArray()
+        self.flowLayout = UICollectionViewFlowLayout()
+        self.albumView = UICollectionView(frame: CGRectMake(0,0, LSYSwiftDefine.ViewSize(self.view).width, LSYSwiftDefine.ViewSize(self.view).height-44), collectionViewLayout: self.flowLayout)
+        LSYAlbum.sharedAlbum().setupAlbumAssets(self.group, albumAssets: { (assets) -> () in
+            self.albumAssets = assets
+            self.albumView.reloadData()
+        })
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setup()
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.selectNumber = self.albumView.indexPathsForSelectedItems().count
     }
 }

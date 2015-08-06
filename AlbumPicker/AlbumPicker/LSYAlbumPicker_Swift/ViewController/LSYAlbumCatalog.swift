@@ -55,7 +55,7 @@ class LSYAlbumCatalog:UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("backMainView"))
         
     }
-    private func backMainView(){
+    func backMainView(){
         self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
             
         })

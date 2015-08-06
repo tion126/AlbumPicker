@@ -142,3 +142,131 @@ class LSYAlbumCellBottomView:UIView{
     }
     
 }
+//MARK:- LSYPickerButtomView
+protocol LSYPickerButtomViewDelegate:class {
+    func previewButtonClick()
+    func sendButtonClick()
+}
+class LSYPickerButtomView: UIView {
+    weak var delegate:LSYPickerButtomViewDelegate!
+    private var previewButton:UIButton!{
+        didSet{
+            previewButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            previewButton.setTitleColor(UIColor(red: 168.0/255.0, green: 168.0/255.0, blue: 168.0/255.0, alpha: 1), forState: UIControlState.Disabled)
+            previewButton.titleLabel?.font = UIFont.systemFontOfSize(14.0)
+            previewButton.setTitle("预览", forState: UIControlState.Normal)
+            previewButton.addTarget(self, action: Selector("buttonClick:"), forControlEvents: UIControlEvents.TouchUpInside)
+            self.addSubview(previewButton)
+        }
+    }
+    private var sendButton:LSYSendButton!{
+        didSet{
+            sendButton.setTitle("发送", forState: UIControlState.Normal)
+            sendButton.addTarget(self, action: Selector("buttonClick:"), forControlEvents: UIControlEvents.TouchUpInside)
+            self.addSubview(sendButton)
+        }
+    }
+    private func buttonClick(sender:UIButton){
+        if sender == self.previewButton {
+            if delegate != nil {
+                delegate.previewButtonClick()
+            }
+        }
+        else if sender == self.sendButton {
+            if delegate != nil {
+                delegate.sendButtonClick()
+            }
+        }
+    }
+    func setSendNumber(number:Int){
+        self.sendButton.setSendNumber(number)
+        if number == 0{
+            self.previewButton.enabled = false
+        }
+        else{
+            self.previewButton.enabled = true
+        }
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setup()
+    }
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setup()
+    }
+    private func setup(){
+        self.backgroundColor = UIColor(red: 249.0/255.0, green: 249.0/255.0, blue: 249.0/255.0, alpha: 1)
+        self.previewButton = UIButton.buttonWithType(UIButtonType.System) as? UIButton
+        self.sendButton = LSYSendButton()
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.previewButton.frame = CGRectMake(0, 0, 60, LSYSwiftDefine.ViewSize(self).height)
+        self.sendButton.frame = CGRectMake(LSYSwiftDefine.ViewSize(self).width-80, 0, 80, LSYSwiftDefine.ViewSize(self).height)
+    }
+}
+//MARK:- LSYSendButton
+class LSYSendButton: UIButton {
+    
+    private var numbersLabel:UILabel!{
+        didSet{
+            numbersLabel.textColor = UIColor.whiteColor()
+            numbersLabel.textAlignment = NSTextAlignment.Center
+            numbersLabel.font = UIFont.boldSystemFontOfSize(14.0)
+            self.addSubview(numbersLabel)
+        }
+    }
+    private var numbersView:UIView!{
+        didSet{
+            numbersView.frame = CGRectMake(0, 12, 20, 20)
+            numbersView.backgroundColor = UIColor(red: 9.0/255.0, green: 187.0/255.0, blue: 7.0/255.0, alpha: 1)
+            numbersView.layer.cornerRadius = 10.0
+            numbersView.clipsToBounds = true
+            self.addSubview(numbersView)
+        }
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setup()
+    }
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setup()
+    }
+    func setSendNumber(number:Int) {
+        if number == 0{
+            self.enabled = false
+            self.isHiddenNumber(true)
+        }
+        else{
+            self.enabled = true
+            self.isHiddenNumber(false)
+        }
+        UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn|UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+            self.numbersView.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        }) { (finished) -> Void in
+            UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn|UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                self.numbersView.transform = CGAffineTransformMakeScale(1.2, 1.2)
+                }) { (finished) -> Void in
+                    UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn|UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                        self.numbersView.transform = CGAffineTransformIdentity
+                        }) { (finished) -> Void in
+                            
+                    }
+            }
+        }
+    }
+    private func isHiddenNumber(hidden:Bool){
+        self.numbersView.hidden = hidden
+        self.numbersLabel.hidden = hidden
+    }
+    private func setup(){
+        numbersView = UIView()
+        numbersLabel = UILabel()
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.numbersLabel.frame = CGRectMake(0, 12, 20, 20)
+    }
+}

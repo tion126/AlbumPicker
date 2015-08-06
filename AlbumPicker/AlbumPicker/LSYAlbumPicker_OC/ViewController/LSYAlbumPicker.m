@@ -31,7 +31,7 @@
         flowLayout.sectionInset = UIEdgeInsetsMake(5,5,5, 5);
         flowLayout.minimumInteritemSpacing = 5;
         flowLayout.minimumLineSpacing = 5;
-        _albumView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, ViewSize(self.view).width, ViewSize(self.view).height-40) collectionViewLayout:flowLayout];
+        _albumView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, ViewSize(self.view).width, ViewSize(self.view).height-44) collectionViewLayout:flowLayout];
         _albumView.allowsMultipleSelection = YES;
         [_albumView registerClass:[LSYAlbumCell class] forCellWithReuseIdentifier:kAlbumCellIdentifer];
         _albumView.delegate = self;

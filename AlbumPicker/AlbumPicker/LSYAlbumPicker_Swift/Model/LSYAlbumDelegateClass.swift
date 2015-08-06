@@ -32,10 +32,28 @@ extension LSYAlbumCatalog:UITableViewDataSource,UITableViewDelegate{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         var albumPicker:LSYAlbumPicker! = LSYAlbumPicker()
+        albumPicker.group = self.dataArray[indexPath.row] as! ALAssetsGroup
+        albumPicker.delegate = self
+        if self.maximumNumberOfSelectionPhoto != 0{
+            albumPicker.maxminumNumber = self.maximumNumberOfSelectionPhoto;
+        }else if self.maximumNumberOfSelectionMedia != 0{
+            albumPicker.maxminumNumber = self.maximumNumberOfSelectionMedia;
+        }
+        self.navigationController?.pushViewController(albumPicker, animated: true)
+    }
+}
+//MARK:LSYAlbumPickerDelegate
+extension LSYAlbumCatalog:LSYAlbumPickerDelegate
+{
+    func AlbumPickerDidFinishPick(assets: NSArray) {
+        if self.delegate != nil {
+            self.delegate.AlbumDidFinishPick(assets)
+            self.backMainView()
+        }
     }
 }
 //MARK:- LSYAlbumPicker
-//MARK:LSYAlbumPicker:UICollectionViewDelegate,UICollectionViewDataSource
+//MARK:UICollectionViewDelegate,UICollectionViewDataSource
 extension LSYAlbumPicker:UICollectionViewDelegate,UICollectionViewDataSource{
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -60,9 +78,34 @@ extension LSYAlbumPicker:UICollectionViewDelegate,UICollectionViewDataSource{
         model.isSelect = !model.isSelect
     }
     func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        
-        return true
+        if self.maxminumNumber != 0 {
+            if !(self.maxminumNumber > collectionView.indexPathsForSelectedItems().count){
+                var alert:UIAlertView! = UIAlertView(title: "提示", message: "最多只能选\(self.maxminumNumber)张图片", delegate: nil, cancelButtonTitle: "确定")
+                alert.show()
+                return false
+            }
+            return true
+        }
+        else{
+            return true
+        }
     }
     
-    
 }
+//MARK:LSYPickerButtomViewDelegate
+extension LSYAlbumPicker:LSYPickerButtomViewDelegate{
+    func sendButtonClick() {
+        if self.delegate != nil{
+            var assets:NSMutableArray = NSMutableArray()
+            var model:LSYAlbumModel!
+            for model in self.selectedAssets{
+                assets.addObject((model as! LSYAlbumModel).asset)
+            }
+            self.delegate.AlbumPickerDidFinishPick(assets)
+        }
+    }
+    func previewButtonClick() {
+        
+    }
+}
+    
