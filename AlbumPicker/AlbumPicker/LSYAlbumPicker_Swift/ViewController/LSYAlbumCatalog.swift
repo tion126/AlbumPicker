@@ -14,7 +14,7 @@ import AssetsLibrary
 protocol LSYAlbumCatalogDelegate:class {
     func AlbumDidFinishPick(assets:NSArray)->Void
 }
-class LSYAlbumCatalog:UIViewController {
+@objc class LSYAlbumCatalog:UIViewController {
     let kAlbumCatalogCellIdentifer:String = "albumCatalogCellIdentifer"
     
     var maximumNumberOfSelectionPhoto:Int = 0{
@@ -27,7 +27,6 @@ class LSYAlbumCatalog:UIViewController {
             LSYAlbum.sharedAlbum().assetsFilter = ALAssetsFilter.allAssets()
         }
     }
-    
     weak var delegate:LSYAlbumCatalogDelegate!
     var dataArray:NSMutableArray!
     private var albumTabView:UITableView!{
@@ -40,8 +39,9 @@ class LSYAlbumCatalog:UIViewController {
         }
     }
     private func setup(){
+        self.dataArray = NSMutableArray()
         self.albumTabView = UITableView(frame: CGRectMake(0, 0, LSYSwiftDefine.ViewSize(self.view).width, LSYSwiftDefine.ViewSize(self.view).height), style: UITableViewStyle.Plain)
-        
+
     }
     override func viewDidLoad() {
         super.viewDidLoad()

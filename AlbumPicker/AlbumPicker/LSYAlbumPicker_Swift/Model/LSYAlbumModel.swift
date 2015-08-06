@@ -9,12 +9,11 @@
 import Foundation
 import AssetsLibrary
 
-public class LSYAlbumModel:NSObject{
+public class LSYAlbumModel{
     var asset:ALAsset!
     var indexPath:NSIndexPath!
     var assetType:String!
-    //使用KVO类要继承NSObject 观察的属性用dynamic修饰
-    dynamic var isSelect:Bool
+    var isSelect:Bool
     init(data:ALAsset)
     {
         self.asset = data;

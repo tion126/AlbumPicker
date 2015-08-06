@@ -22,7 +22,7 @@ class LSYAlbumCatalogCell: UITableViewCell {
         var numberOfAssetsAttribute:Dictionary! = [NSForegroundColorAttributeName:UIColor.grayColor(),NSFontAttributeName:UIFont.systemFontOfSize(17)]
         var groupTitle:String! = self.group.valueForProperty(ALAssetsGroupPropertyName) as? String
         var numberOfAssets:Int = self.group.numberOfAssets()
-        var attributedString :NSMutableAttributedString! = NSMutableAttributedString(string: "\(groupTitle)\(numberOfAssets)", attributes: numberOfAssetsAttribute)
+        var attributedString :NSMutableAttributedString! = NSMutableAttributedString(string: "\(groupTitle)（\(numberOfAssets)）", attributes: numberOfAssetsAttribute)
         attributedString.addAttributes(groupTitleAttribute, range: NSMakeRange(0, count(groupTitle)))
         self.textLabel?.attributedText = attributedString
         

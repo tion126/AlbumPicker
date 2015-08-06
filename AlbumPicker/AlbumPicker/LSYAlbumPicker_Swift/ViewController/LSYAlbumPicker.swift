@@ -14,8 +14,8 @@ protocol LSYAlbumPickerDelegate : class{
     func AlbumPickerDidFinishPick(assets:NSArray)
 }
 class LSYAlbumPicker: UIViewController {
-    let kThumbnailLength :CGFloat = (UIScreen.mainScreen().bounds.size.width-5*5)/4
-    let kAlbumPickerCellIdentifer :String = "albumPickerCellIdentifer"
+    let thumbnailLength :CGFloat = (UIScreen.mainScreen().bounds.size.width-5*5)/4
+    let albumPickerCellIdentifer :String = "albumPickerCellIdentifer"
     var group:ALAssetsGroup!
     var maxminumNumber:Int = 0
     weak var delegate:LSYAlbumPickerDelegate!
@@ -46,7 +46,7 @@ class LSYAlbumPicker: UIViewController {
     }
     var flowLayout:UICollectionViewFlowLayout!{
         didSet{
-            flowLayout.itemSize = CGSizeMake(self.kThumbnailLength, self.kThumbnailLength)
+            flowLayout.itemSize = CGSizeMake(self.thumbnailLength, self.thumbnailLength)
             flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5)
             flowLayout.minimumInteritemSpacing = 5;
             flowLayout.minimumLineSpacing = 5;
@@ -59,6 +59,7 @@ class LSYAlbumPicker: UIViewController {
             albumView.dataSource = self
             albumView.backgroundColor = UIColor.whiteColor()
             albumView.alwaysBounceVertical = true
+            albumView.registerClass(LSYAlbumPickerCell.classForCoder(), forCellWithReuseIdentifier: self.albumPickerCellIdentifer)
             self.view.addSubview(albumView)
         }
     }
@@ -67,6 +68,7 @@ class LSYAlbumPicker: UIViewController {
         self.assetsSort = NSMutableArray()
         self.flowLayout = UICollectionViewFlowLayout()
         self.albumView = UICollectionView(frame: CGRectMake(0,0, LSYSwiftDefine.ViewSize(self.view).width, LSYSwiftDefine.ViewSize(self.view).height-44), collectionViewLayout: self.flowLayout)
+        self.pickerButtomView = LSYPickerButtomView(frame: CGRectMake(0, LSYSwiftDefine.ViewSize(self.view).height-44, LSYSwiftDefine.ViewSize(self.view).width, 44))
         LSYAlbum.sharedAlbum().setupAlbumAssets(self.group, albumAssets: { (assets) -> () in
             self.albumAssets = assets
             self.albumView.reloadData()

@@ -46,7 +46,7 @@ class LSYAlbumPickerCell: UICollectionViewCell {
         self.imageView = UIImageView()
         self.statusView = UIImageView()
         self.bottomView = LSYAlbumCellBottomView()
-        self.addObserver(self.model, forKeyPath: "isSelect", options: NSKeyValueObservingOptions.New, context: nil)
+        
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,25 +56,24 @@ class LSYAlbumPickerCell: UICollectionViewCell {
         super.init(coder: aDecoder)
         self.setup()
     }
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
-        if change[NSKeyValueChangeNewKey] as! Bool{
+    func setupIsSelect(){
+        if self.selected {
             self.statusView.image = UIImage(named:"AlbumPicker.bundle/FriendsSendsPicturesSelectYIcon@2x")
             UIView.animateWithDuration(0.15, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn|UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
                 self.statusView.transform = CGAffineTransformMakeScale(0.8, 0.8)
-            }, completion: { (finished) -> Void in
-                UIView.animateWithDuration(0.15, delay: 0.0, options:  UIViewAnimationOptions.CurveEaseIn|UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
-                    self.statusView.transform = CGAffineTransformMakeScale(1.2, 1.2);
                 }, completion: { (finished) -> Void in
-                    UIView.animateWithDuration(0.15, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn|UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
-                        self.statusView.transform = CGAffineTransformIdentity;
-                    }, completion: { (finished) -> Void in
-                        
+                    UIView.animateWithDuration(0.15, delay: 0.0, options:  UIViewAnimationOptions.CurveEaseIn|UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                        self.statusView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+                        }, completion: { (finished) -> Void in
+                            UIView.animateWithDuration(0.15, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn|UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                                self.statusView.transform = CGAffineTransformIdentity;
+                                }, completion: { (finished) -> Void in
+                                    
+                            })
                     })
-                })
             })
-            
         }
-        else{
+        else {
             self.statusView.image = UIImage(named: "AlbumPicker.bundle/CardPack_Add_UnSelected@2x")
         }
     }
@@ -84,10 +83,6 @@ class LSYAlbumPickerCell: UICollectionViewCell {
         self.imageView.frame = CGRectMake(0, 0, LSYSwiftDefine.ViewSize(self).width, LSYSwiftDefine.ViewSize(self).height)
         self.statusView.frame = CGRectMake(LSYSwiftDefine.ViewSize(self).width-30, 0, 30, 30)
         self.bottomView.frame = CGRectMake(0, LSYSwiftDefine.ViewSize(self).height-20, LSYSwiftDefine.ViewSize(self).width, 20)
-    }
-    deinit
-    {
-        self.removeObserver(self.model, forKeyPath: "isSelect")
     }
 }
 
@@ -155,18 +150,19 @@ class LSYPickerButtomView: UIView {
             previewButton.setTitleColor(UIColor(red: 168.0/255.0, green: 168.0/255.0, blue: 168.0/255.0, alpha: 1), forState: UIControlState.Disabled)
             previewButton.titleLabel?.font = UIFont.systemFontOfSize(14.0)
             previewButton.setTitle("预览", forState: UIControlState.Normal)
-            previewButton.addTarget(self, action: Selector("buttonClick:"), forControlEvents: UIControlEvents.TouchUpInside)
+            previewButton.addTarget(self, action: "buttonClick:", forControlEvents: UIControlEvents.TouchUpInside)
             self.addSubview(previewButton)
         }
     }
     private var sendButton:LSYSendButton!{
         didSet{
             sendButton.setTitle("发送", forState: UIControlState.Normal)
-            sendButton.addTarget(self, action: Selector("buttonClick:"), forControlEvents: UIControlEvents.TouchUpInside)
+            sendButton.addTarget(self, action: "buttonClick:", forControlEvents: UIControlEvents.TouchUpInside)
             self.addSubview(sendButton)
         }
     }
-    private func buttonClick(sender:UIButton){
+    //不能声明私有的方法，否则Selector找不到该方法
+    func buttonClick(sender:UIButton){
         if sender == self.previewButton {
             if delegate != nil {
                 delegate.previewButtonClick()
@@ -243,6 +239,7 @@ class LSYSendButton: UIButton {
             self.enabled = true
             self.isHiddenNumber(false)
         }
+        self.numbersLabel.text = "\(number)"
         UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn|UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
             self.numbersView.transform = CGAffineTransformMakeScale(0.1, 0.1)
         }) { (finished) -> Void in
@@ -262,6 +259,9 @@ class LSYSendButton: UIButton {
         self.numbersLabel.hidden = hidden
     }
     private func setup(){
+        self.setTitleColor(UIColor(red: 9.0/255.0, green: 187.0/255.0, blue: 7.0/255.0 , alpha: 1), forState: UIControlState.Normal)
+        self.setTitleColor(UIColor(red: 182.0/255.0, green: 225.0/255.0, blue: 187.0/255.0, alpha: 1), forState: UIControlState.Disabled)
+        self.titleLabel?.font = UIFont.systemFontOfSize(14.0)
         numbersView = UIView()
         numbersLabel = UILabel()
     }

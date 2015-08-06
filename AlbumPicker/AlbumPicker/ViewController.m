@@ -8,8 +8,9 @@
 
 #import "ViewController.h"
 #import "LSYNavigationController.h"
-#import "LSYAlbumCatalog.h"
-@interface ViewController ()<LSYAlbumCatalogDelegate>
+#import "AlbumPicker-swift.h"
+
+@interface ViewController ()
 
 @end
 
@@ -23,7 +24,7 @@
 }
 - (IBAction)enterAlbum:(id)sender {
     LSYAlbumCatalog *albumCatalog = [[LSYAlbumCatalog alloc] init];
-    albumCatalog.delegate = self;
+//    albumCatalog.delegate = self;
     LSYNavigationController *navigation = [[LSYNavigationController alloc] initWithRootViewController:albumCatalog];
     albumCatalog.maximumNumberOfSelectionMedia = 5;
     [self presentViewController:navigation animated:YES completion:^{

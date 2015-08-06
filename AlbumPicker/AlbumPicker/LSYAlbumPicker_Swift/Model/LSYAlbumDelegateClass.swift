@@ -62,7 +62,7 @@ extension LSYAlbumPicker:UICollectionViewDelegate,UICollectionViewDataSource{
         return self.albumAssets.count
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell:LSYAlbumPickerCell! = collectionView.dequeueReusableCellWithReuseIdentifier(self.kAlbumPickerCellIdentifer, forIndexPath: indexPath) as? LSYAlbumPickerCell
+        var cell:LSYAlbumPickerCell! = collectionView.dequeueReusableCellWithReuseIdentifier(self.albumPickerCellIdentifer, forIndexPath: indexPath) as? LSYAlbumPickerCell
         var model:LSYAlbumModel! = self.albumAssets[indexPath.row] as? LSYAlbumModel
         model.indexPath = indexPath
         cell.model = model
@@ -71,11 +71,19 @@ extension LSYAlbumPicker:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         var model:LSYAlbumModel! = self.albumAssets[indexPath.row] as? LSYAlbumModel
         model.isSelect = !model.isSelect
+        var cell = collectionView.cellForItemAtIndexPath(indexPath) as! LSYAlbumPickerCell
+        cell.setupIsSelect()
+        self.selectNumber = collectionView.indexPathsForSelectedItems().count
+        self.assetsSort.addObject(indexPath)
         
     }
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         var model:LSYAlbumModel! = self.albumAssets[indexPath.row] as? LSYAlbumModel
         model.isSelect = !model.isSelect
+        var cell = collectionView.cellForItemAtIndexPath(indexPath) as! LSYAlbumPickerCell
+        cell.setupIsSelect()
+        self.selectNumber = collectionView.indexPathsForSelectedItems().count
+        self.assetsSort.removeObject(indexPath)
     }
     func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         if self.maxminumNumber != 0 {
@@ -105,6 +113,32 @@ extension LSYAlbumPicker:LSYPickerButtomViewDelegate{
         }
     }
     func previewButtonClick() {
+        
+    }
+}
+//MARK:- LSYAssetPreview
+//MARK:LSYAssetPreviewItem UIScrollViewDelegate
+extension LSYAssetPreviewItem:UIScrollViewDelegate{
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.assetImageView
+    }
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        var originalSize = self.previewScrollView.bounds.size
+        var contentSize = self.previewScrollView.contentSize
+        var offsetX = (originalSize.width > contentSize.width) ? (originalSize.width - contentSize.width) : 0
+        var offsetY = (originalSize.height > contentSize.height) ? (originalSize.height - contentSize.height) : 0
+        assetImageView.center = CGPointMake(contentSize.width/2 + offsetX,(originalSize.height > contentSize.height) ? originalSize.height/2 : contentSize.height/2 + offsetY)
+    }
+}
+//MARK:LSYAssetPreview UIScrollViewDelegate,LSYAssetPreviewNavBarDelegate,LSYAssetPreviewToolBarDelegate
+extension LSYAssetPreview:UIScrollViewDelegate,LSYAssetPreviewNavBarDelegate,LSYAssetPreviewToolBarDelegate{
+    func selectButtonClick(selectButton: UIButton) {
+        
+    }
+    func backButtonClick(backButton: UIButton) {
+        
+    }
+    func sendButtonClick(sendButton: UIButton) {
         
     }
 }

@@ -21,6 +21,8 @@
 		876F57AB1B622DD0002DC044 /* LSYAlbumCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = 876F57AA1B622DD0002DC044 /* LSYAlbumCatalog.m */; };
 		876F57AE1B622F73002DC044 /* LSYAlbumCatalogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 876F57AD1B622F73002DC044 /* LSYAlbumCatalogCell.m */; };
 		876F57B01B623EB9002DC044 /* 222211817.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 876F57AF1B623EB9002DC044 /* 222211817.jpg */; };
+		87A2C8A61B73606100F72BFB /* LSYAssetPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A2C8A51B73606100F72BFB /* LSYAssetPreview.swift */; };
+		87A2C8A81B73627400F72BFB /* LSYAssetPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A2C8A71B73627400F72BFB /* LSYAssetPreviewView.swift */; };
 		87BF3AC81B719F6300911B4E /* LSYAlbumCatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BF3AC71B719F6300911B4E /* LSYAlbumCatalogView.swift */; };
 		87BF3ACA1B71B6B700911B4E /* LSYAlbumPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BF3AC91B71B6B700911B4E /* LSYAlbumPicker.swift */; };
 		87BF3ACC1B71B6DC00911B4E /* LSYSwiftDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BF3ACB1B71B6DC00911B4E /* LSYSwiftDefine.swift */; };
@@ -53,7 +55,6 @@
 		870212D41B65C23A00047593 /* AlbumPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlbumPicker.bundle; sourceTree = "<group>"; };
 		8738396F1B709168002C4AE8 /* LSYConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LSYConfig.h; path = LSYAlbumPicker_OC/LSYConfig.h; sourceTree = "<group>"; };
 		873839741B7093B9002C4AE8 /* LSYAlbumCatalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSYAlbumCatalog.swift; sourceTree = "<group>"; };
-		873839761B7093E9002C4AE8 /* AlbumPicker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AlbumPicker-Bridging-Header.h"; path = "LSYAlbumPicker_Swift/AlbumPicker-Bridging-Header.h"; sourceTree = "<group>"; };
 		873839771B709BDB002C4AE8 /* LSYAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSYAlbum.swift; sourceTree = "<group>"; };
 		873839791B70A298002C4AE8 /* LSYAlbumModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSYAlbumModel.swift; sourceTree = "<group>"; };
 		8738397B1B70D6CA002C4AE8 /* LSYAlbumDelegateClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSYAlbumDelegateClass.swift; sourceTree = "<group>"; };
@@ -75,6 +76,9 @@
 		876F57AC1B622F73002DC044 /* LSYAlbumCatalogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSYAlbumCatalogCell.h; path = LSYAlbumPicker_OC/View/LSYAlbumCatalogCell.h; sourceTree = "<group>"; };
 		876F57AD1B622F73002DC044 /* LSYAlbumCatalogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSYAlbumCatalogCell.m; path = LSYAlbumPicker_OC/View/LSYAlbumCatalogCell.m; sourceTree = "<group>"; };
 		876F57AF1B623EB9002DC044 /* 222211817.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 222211817.jpg; sourceTree = "<group>"; };
+		87A2C8A41B735E9A00F72BFB /* AlbumPicker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AlbumPicker-Bridging-Header.h"; sourceTree = "<group>"; };
+		87A2C8A51B73606100F72BFB /* LSYAssetPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSYAssetPreview.swift; sourceTree = "<group>"; };
+		87A2C8A71B73627400F72BFB /* LSYAssetPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSYAssetPreviewView.swift; sourceTree = "<group>"; };
 		87BF3AC71B719F6300911B4E /* LSYAlbumCatalogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSYAlbumCatalogView.swift; sourceTree = "<group>"; };
 		87BF3AC91B71B6B700911B4E /* LSYAlbumPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSYAlbumPicker.swift; sourceTree = "<group>"; };
 		87BF3ACB1B71B6DC00911B4E /* LSYSwiftDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LSYSwiftDefine.swift; path = LSYAlbumPicker_Swift/LSYSwiftDefine.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 			children = (
 				873839741B7093B9002C4AE8 /* LSYAlbumCatalog.swift */,
 				87BF3AC91B71B6B700911B4E /* LSYAlbumPicker.swift */,
+				87A2C8A51B73606100F72BFB /* LSYAssetPreview.swift */,
 			);
 			name = ViewController;
 			path = LSYAlbumPicker_Swift/ViewController;
@@ -137,6 +142,7 @@
 			children = (
 				87BF3AC71B719F6300911B4E /* LSYAlbumCatalogView.swift */,
 				87BF3ACD1B71BD7B00911B4E /* LSYAlbumPickerView.swift */,
+				87A2C8A71B73627400F72BFB /* LSYAssetPreviewView.swift */,
 			);
 			name = View;
 			path = LSYAlbumPicker_Swift/View;
@@ -207,6 +213,7 @@
 				87FC6EEB1B609B110061BB1F /* ViewController.m */,
 				87FC6EED1B609B110061BB1F /* Main.storyboard */,
 				876F57811B61EC27002DC044 /* AlbumPicker-prefix.pch */,
+				87A2C8A41B735E9A00F72BFB /* AlbumPicker-Bridging-Header.h */,
 				87FC6EF01B609B110061BB1F /* Images.xcassets */,
 				87FC6EE31B609B110061BB1F /* Supporting Files */,
 			);
@@ -257,7 +264,6 @@
 		87FC6F0A1B609B630061BB1F /* LSYAlbumPicker_Swift */ = {
 			isa = PBXGroup;
 			children = (
-				873839761B7093E9002C4AE8 /* AlbumPicker-Bridging-Header.h */,
 				87BF3ACB1B71B6DC00911B4E /* LSYSwiftDefine.swift */,
 				873839721B709395002C4AE8 /* Model */,
 				873839711B709390002C4AE8 /* View */,
@@ -406,9 +412,11 @@
 				87BF3AC81B719F6300911B4E /* LSYAlbumCatalogView.swift in Sources */,
 				873839781B709BDB002C4AE8 /* LSYAlbum.swift in Sources */,
 				876F57AB1B622DD0002DC044 /* LSYAlbumCatalog.m in Sources */,
+				87A2C8A61B73606100F72BFB /* LSYAssetPreview.swift in Sources */,
 				8738397A1B70A298002C4AE8 /* LSYAlbumModel.swift in Sources */,
 				AB3EB43F1B6D1ACA00EB2C71 /* LSYAlbumModel.m in Sources */,
 				876F57AE1B622F73002DC044 /* LSYAlbumCatalogCell.m in Sources */,
+				87A2C8A81B73627400F72BFB /* LSYAssetPreviewView.swift in Sources */,
 				AB3EB4361B6CA47900EB2C71 /* LSYPickerButtomView.m in Sources */,
 				AB3EB4391B6CA49A00EB2C71 /* LSYAssetPreview.m in Sources */,
 				876F57911B6225E5002DC044 /* LSYAlbumCell.m in Sources */,
@@ -551,7 +559,7 @@
 				INFOPLIST_FILE = AlbumPicker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AlbumPicker/LSYAlbumPicker_Swift/AlbumPicker-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "AlbumPicker/AlbumPicker-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -565,7 +573,7 @@
 				INFOPLIST_FILE = AlbumPicker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AlbumPicker/LSYAlbumPicker_Swift/AlbumPicker-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "AlbumPicker/AlbumPicker-Bridging-Header.h";
 			};
 			name = Release;
 		};
