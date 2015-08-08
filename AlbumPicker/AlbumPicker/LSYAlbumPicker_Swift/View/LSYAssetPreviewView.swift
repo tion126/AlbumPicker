@@ -20,7 +20,7 @@ class LSYAssetPreviewNavBar: UIView {
     var selectButton:UIButton!{
         didSet{
             selectButton.setImage(UIImage(named: "AlbumPicker.bundle/FriendsSendsPicturesSelectBigNIcon@2x"), forState: UIControlState.Normal)
-            selectButton.setImage(UIImage(named: "AlbumPicker.bundle/FriendsSendsPicturesSelectBigYIcon@2x"), forState: UIControlState.Disabled)
+            selectButton.setImage(UIImage(named: "AlbumPicker.bundle/FriendsSendsPicturesSelectBigYIcon@2x"), forState: UIControlState.Selected)
             selectButton.selected = true
             selectButton.addTarget(self, action: "buttonClick:", forControlEvents: UIControlEvents.TouchUpInside)
             self.addSubview(selectButton)
@@ -142,7 +142,7 @@ class LSYAssetPreviewItem: UIView {
         self.setup()
     }
     private func setup(){
-        self.addGestureRecognizer(UIGestureRecognizer(target: self, action: "hiddenBar"))
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "hiddenBar"))
         self.previewScrollView = UIScrollView(frame: CGRectMake(10, 0, LSYSwiftDefine.ViewSize(self).width-20, LSYSwiftDefine.ViewSize(self).height))
         self.assetImageView = UIImageView()
         

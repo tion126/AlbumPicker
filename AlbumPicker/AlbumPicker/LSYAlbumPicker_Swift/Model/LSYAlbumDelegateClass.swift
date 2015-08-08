@@ -113,7 +113,19 @@ extension LSYAlbumPicker:LSYPickerButtomViewDelegate{
         }
     }
     func previewButtonClick() {
-        
+        var assetPreview:LSYAssetPreview! = LSYAssetPreview()
+        self.navigationController?.pushViewController(assetPreview, animated: true)
+        assetPreview.assets = self.selectedAssets
+        assetPreview.albumPickerCollection = self.albumView
+        assetPreview.delegate = self
+    }
+}
+//MARK:LSYAssetPreviewDelegate
+extension LSYAlbumPicker:LSYAssetPreviewDelegate{
+    func AssetPreviewDidFinishPick(assets: NSArray) {
+        if self.delegate != nil {
+            self.delegate.AlbumPickerDidFinishPick(assets)
+        }
     }
 }
 //MARK:- LSYAssetPreview
@@ -133,13 +145,53 @@ extension LSYAssetPreviewItem:UIScrollViewDelegate{
 //MARK:LSYAssetPreview UIScrollViewDelegate,LSYAssetPreviewNavBarDelegate,LSYAssetPreviewToolBarDelegate
 extension LSYAssetPreview:UIScrollViewDelegate,LSYAssetPreviewNavBarDelegate,LSYAssetPreviewToolBarDelegate{
     func selectButtonClick(selectButton: UIButton) {
-        
+        if self.previewScrollView.decelerating {
+            return
+        }
+        var assetNumber = Int(self.previewScrollView.contentOffset.x / LSYSwiftDefine.ViewSize(self.view).width)
+        var model:LSYAlbumModel = self.assets[assetNumber] as!LSYAlbumModel
+        model.isSelect = !model.isSelect
+        self.previewNavBar.selectButton.selected = model.isSelect
+        if model.isSelect {
+            self.albumPickerCollection.selectItemAtIndexPath(model.indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
+            self.selectedAssets.addObject(model)
+            if self.albumPickerCollection.delegate != nil {
+                self.albumPickerCollection.delegate?.collectionView!(self.albumPickerCollection, didSelectItemAtIndexPath: model.indexPath)
+            }
+        }
+        else {
+            self.albumPickerCollection.deselectItemAtIndexPath(model.indexPath, animated: false)
+            self.selectedAssets.removeObject(model)
+            if self.albumPickerCollection.delegate != nil {
+                self.albumPickerCollection.delegate?.collectionView!(self.albumPickerCollection, didDeselectItemAtIndexPath: model.indexPath)
+            }
+        }
+        self.previewToolBar.setSendNumber(self.albumPickerCollection.indexPathsForSelectedItems().count)
     }
     func backButtonClick(backButton: UIButton) {
-        
+        self.navigationController?.popViewControllerAnimated(true)
     }
     func sendButtonClick(sendButton: UIButton) {
-        
+        if self.delegate != nil {
+            var assets:NSMutableArray = NSMutableArray()
+            var model:LSYAlbumModel!
+            for  model in self.selectedAssets {
+                assets.addObject(model.assets)
+            }
+            self.delegate.AssetPreviewDidFinishPick(assets)
+        }
+    }
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        var assetNumber = Int(scrollView.contentOffset.x / LSYSwiftDefine.ViewSize(self.view).width)
+        var model:LSYAlbumModel = self.assets[assetNumber] as!LSYAlbumModel
+        self.previewNavBar.selectButton.selected = model.isSelect
+    }
+}
+//MARK:LSYAssetPreviewItemDelegate
+extension LSYAssetPreview:LSYAssetPreviewItemDelegate{
+    func hiddenBarControl() {
+        self.previewNavBar.hidden = !self.previewNavBar.hidden
+        self.previewToolBar.hidden = !self.previewToolBar.hidden
     }
 }
     
