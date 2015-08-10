@@ -149,10 +149,10 @@ extension LSYAssetPreview:UIScrollViewDelegate,LSYAssetPreviewNavBarDelegate,LSY
             return
         }
         var assetNumber = Int(self.previewScrollView.contentOffset.x / LSYSwiftDefine.ViewSize(self.view).width)
+        
         var model:LSYAlbumModel = self.assets[assetNumber] as!LSYAlbumModel
-        model.isSelect = !model.isSelect
-        self.previewNavBar.selectButton.selected = model.isSelect
-        if model.isSelect {
+        self.previewNavBar.selectButton.selected = !model.isSelect
+        if !model.isSelect {
             self.albumPickerCollection.selectItemAtIndexPath(model.indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
             self.selectedAssets.addObject(model)
             if self.albumPickerCollection.delegate != nil {
@@ -183,7 +183,9 @@ extension LSYAssetPreview:UIScrollViewDelegate,LSYAssetPreviewNavBarDelegate,LSY
     }
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         var assetNumber = Int(scrollView.contentOffset.x / LSYSwiftDefine.ViewSize(self.view).width)
+        println("assetNumber--\(assetNumber)")
         var model:LSYAlbumModel = self.assets[assetNumber] as!LSYAlbumModel
+        println("model.selected--\(model.isSelect)")
         self.previewNavBar.selectButton.selected = model.isSelect
     }
 }
