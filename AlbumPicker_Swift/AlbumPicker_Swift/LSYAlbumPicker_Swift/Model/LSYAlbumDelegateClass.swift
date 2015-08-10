@@ -175,17 +175,16 @@ extension LSYAssetPreview:UIScrollViewDelegate,LSYAssetPreviewNavBarDelegate,LSY
         if self.delegate != nil {
             var assets:NSMutableArray = NSMutableArray()
             var model:LSYAlbumModel!
-            for  model in self.selectedAssets {
-                assets.addObject(model.assets)
+            for model in self.selectedAssets{
+                assets.addObject((model as! LSYAlbumModel).asset)
             }
+
             self.delegate.AssetPreviewDidFinishPick(assets)
         }
     }
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         var assetNumber = Int(scrollView.contentOffset.x / LSYSwiftDefine.ViewSize(self.view).width)
-        println("assetNumber--\(assetNumber)")
         var model:LSYAlbumModel = self.assets[assetNumber] as!LSYAlbumModel
-        println("model.selected--\(model.isSelect)")
         self.previewNavBar.selectButton.selected = model.isSelect
     }
 }
