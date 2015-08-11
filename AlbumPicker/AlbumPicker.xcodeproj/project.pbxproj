@@ -62,7 +62,6 @@
 		876F57AC1B622F73002DC044 /* LSYAlbumCatalogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSYAlbumCatalogCell.h; path = LSYAlbumPicker_OC/View/LSYAlbumCatalogCell.h; sourceTree = "<group>"; };
 		876F57AD1B622F73002DC044 /* LSYAlbumCatalogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSYAlbumCatalogCell.m; path = LSYAlbumPicker_OC/View/LSYAlbumCatalogCell.m; sourceTree = "<group>"; };
 		876F57AF1B623EB9002DC044 /* 222211817.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 222211817.jpg; sourceTree = "<group>"; };
-		87A2C8A41B735E9A00F72BFB /* AlbumPicker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AlbumPicker-Bridging-Header.h"; sourceTree = "<group>"; };
 		87FC6EE01B609B110061BB1F /* AlbumPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlbumPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87FC6EE41B609B110061BB1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87FC6EE51B609B110061BB1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -159,7 +158,6 @@
 				87FC6EEB1B609B110061BB1F /* ViewController.m */,
 				87FC6EED1B609B110061BB1F /* Main.storyboard */,
 				876F57811B61EC27002DC044 /* AlbumPicker-prefix.pch */,
-				87A2C8A41B735E9A00F72BFB /* AlbumPicker-Bridging-Header.h */,
 				87FC6EF01B609B110061BB1F /* Images.xcassets */,
 				87FC6EE31B609B110061BB1F /* Supporting Files */,
 			);
