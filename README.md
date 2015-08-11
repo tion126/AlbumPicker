@@ -3,7 +3,7 @@ AlbumPicker
 类似于微信里集成的相册功能，可以选择要上传照片或者视频
 
 -----
-选择与预览照片<br>
+选择与预览照片：<br>
 ![](https://github.com/GGGHub/AlbumPicker/raw/master/AlbumPicker/AlbumPicker.gif "选择照片")
 ![](https://github.com/GGGHub/AlbumPicker/raw/master/AlbumPicker/Preview.gif "预览照片")<br>
 
@@ -15,11 +15,13 @@ AlbumPicker
 
 ## 安装
 ### Objective-C
-1. 把项目里的`LSYAlbumPicker_OC`文件及里面的所有文件拷贝到其他项目中
-2. 由于项目中用到很多宏定义，所以需要把`AlbumPicker-prefix.pch`里面自定义宏拷贝到其他项目中的`.pch`文件中
+1. 打开`AlbumPicker.xcworkspace`工作区选择`AlbumPicker`项目
+2. 把项目里的`LSYAlbumPicker_OC`文件及里面的所有文件拷贝到其他`Objective-C`项目中
+3. 由于项目中用到很多宏定义，所以需要把`AlbumPicker-prefix.pch`里面自定义宏拷贝到其他项目中的`.pch`文件中
 
 ### Swift
-_正在开发中_
+1. 打开`AlbumPicker.xcworkspace`工作区选择`AlbumPicker_Swift`项目
+2. 把项目里的`LSYAlbumPicker_Swift`文件以及里面所有文件拷贝到其他`Swift`项目中
 
 ## 使用
 ### 导入头文件
@@ -35,19 +37,27 @@ _正在开发中_
 #import "LSYNavigationController.h"
 ```
 #### Swift
-*正在开发中*
+Swift直接使用即可
+
 ### 打开相册
 #### Objective-C
 
 ``` objective-c
-LSYAlbumCatalog *albumCatalog = [[LSYAlbumCatalog alloc] init];
+    LSYAlbumCatalog *albumCatalog = [[LSYAlbumCatalog alloc] init];
     albumCatalog.delegate = self;
     LSYNavigationController *navigation = [[LSYNavigationController alloc] initWithRootViewController:albumCatalog];
     [self presentViewController:navigation animated:YES completion:^{
     }];
 ```
 #### Swift
-_正在开发中_
+``` swift
+    var albumCatalog:LSYAlbumCatalog! = LSYAlbumCatalog()
+    albumCatalog.delegate = self
+    var navigation:LSYNavigationController! = LSYNavigationController(rootViewController:albumCatalog)
+    self.presentViewController(navigation, animated: true) { () -> Void in
+            
+        }
+```
 
 ### 代理实现
 #### Objective-C 
@@ -55,14 +65,13 @@ _正在开发中_
 
 ``` objective-c
 -(void)AlbumDidFinishPick:(NSArray *)assets
-{
-    
-}
+
 ```
 其中`assets`是`ALAsset`类型的数组表示返回的所选资源
 #### Swift
-_正在开发中_
-
+```swift
+func AlbumDidFinishPick(assets: NSArray) 
+```
 ### 选择资源种类
 #### Objective-C
 选择相册中的所有资源，并且设置最多选择的数量
@@ -76,4 +85,13 @@ _正在开发中_
     albumCatalog.maximumNumberOfSelectionPhoto = 5;
 ```
 #### Swift
-_正在开发中_
+选择相册中的所有资源，并且设置最多选择的数量
+``` swift
+    var albumCatalog:LSYAlbumCatalog! = LSYAlbumCatalog()
+    albumCatalog.maximumNumberOfSelectionMedia = 5
+```
+只选择相册中的相片，并且设置最多选择的数量
+```swift
+    var albumCatalog:LSYAlbumCatalog! = LSYAlbumCatalog()
+    albumCatalog.maximumNumberOfSelectionPhoto = 5
+```
