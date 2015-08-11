@@ -20,8 +20,9 @@ AlbumPicker
 3. 由于项目中用到很多宏定义，所以需要把`AlbumPicker-prefix.pch`里面自定义宏拷贝到其他项目中的`.pch`文件中
 
 ### Swift
-1. 打开`AlbumPicker.xcworkspace`工作区选择`AlbumPicker_Swift`项目
-2. 把项目里的`LSYAlbumPicker_Swift`文件以及里面所有文件拷贝到其他`Swift`项目中
+1. 基于`Xcode 6.4 Swift 1.2`编译正常，低版本的`Xcode`可能会因为`Swift`版本过低而编译不通过
+2. 打开`AlbumPicker.xcworkspace`工作区选择`AlbumPicker_Swift`项目
+3. 把项目里的`LSYAlbumPicker_Swift`文件以及里面所有文件拷贝到其他`Swift`项目中
 
 ## 使用
 ### 导入头文件
