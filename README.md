@@ -66,12 +66,31 @@ Swift直接使用即可
 
 ``` objective-c
 -(void)AlbumDidFinishPick:(NSArray *)assets
+{
+    for (ALAsset *asset in assets) {
+        if ([[asset valueForProperty:@"ALAssetPropertyType"] isEqual:@"ALAssetTypePhoto"]) {
+            UIImage * img = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
+        }
+        else if ([[asset valueForProperty:@"ALAssetPropertyType"] isEqual:@"ALAssetTypeVideo"]){
+            NSURL *url = asset.defaultRepresentation.url;
+        }
+    }
+}
 
 ```
-其中`assets`是`ALAsset`类型的数组表示返回的所选资源
+
 #### Swift
 ```swift
-func AlbumDidFinishPick(assets: NSArray) 
+    func AlbumDidFinishPick(assets: NSArray) {
+        for asset in assets {
+            if  (asset as!ALAsset).valueForProperty("ALAssetPropertyType").isEqual("ALAssetTypePhoto") {
+                var img = UIImage(CGImage: (asset as! ALAsset).defaultRepresentation().fullResolutionImage().takeUnretainedValue());
+            }
+            else if (asset as!ALAsset).valueForProperty("ALAssetPropertyType").isEqual("ALAssetTypeVideo") {
+                var url = (asset as! ALAsset).defaultRepresentation().url()
+            }
+        }
+    }
 ```
 ### 选择资源种类
 #### Objective-C
@@ -95,4 +114,44 @@ func AlbumDidFinishPick(assets: NSArray)
 ```swift
     var albumCatalog:LSYAlbumCatalog! = LSYAlbumCatalog()
     albumCatalog.maximumNumberOfSelectionPhoto = 5
+```
+### 资源上传
+#### Objective-C
+``` objective-c
+-(void)AlbumDidFinishPick:(NSArray *)assets
+{
+    dispatch_semaphore_t sem = dispatch_semaphore_create(0);
+    dispatch_queue_t queue = dispatch_queue_create("uploadImg", NULL);
+    dispatch_async(queue, ^{
+        for (ALAsset *asset in assets) {
+            if ([[asset valueForProperty:@"ALAssetPropertyType"] isEqual:@"ALAssetTypePhoto"]) {
+                //执行要上传图片的操作...
+                void (^uploadImg) (BOOL isFinish) = ^(BOOL isFinish){
+                  //上传完成后回调
+                    dispatch_semaphore_signal(sem);
+                };
+            }
+            dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+        }
+    });
+}
+```
+#### Swift
+``` swift
+    func AlbumDidFinishPick(assets: NSArray) {
+        var sem = dispatch_semaphore_create(0);
+        var queue = dispatch_queue_create("uploadImg", nil)
+        dispatch_async(queue, { () -> Void in
+            for asset in assets {
+                if  (asset as!ALAsset).valueForProperty("ALAssetPropertyType").isEqual("ALAssetTypePhoto") {
+                    //执行要上传图片的操作...
+                    var uploadImag = {(isFinish:Bool) -> Void in
+                        //上传完成后回调
+                         dispatch_semaphore_signal(sem);
+                    }
+                }
+                dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+            }
+        })
+    }
 ```
