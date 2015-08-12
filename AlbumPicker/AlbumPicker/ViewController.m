@@ -11,6 +11,7 @@
 #import "LSYAlbumCatalog.h"
 
 @interface ViewController ()<LSYAlbumCatalogDelegate>
+@property (weak, nonatomic) IBOutlet UIImageView *myImageView;
 
 @end
 
@@ -33,7 +34,31 @@
 }
 -(void)AlbumDidFinishPick:(NSArray *)assets
 {
-    NSLog(@"%@",assets);
+    for (ALAsset *asset in assets) {
+        if ([[asset valueForProperty:@"ALAssetPropertyType"] isEqual:@"ALAssetTypePhoto"]) {
+            UIImage * img = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
+            self.myImageView.image = img;
+        }
+        else if ([[asset valueForProperty:@"ALAssetPropertyType"] isEqual:@"ALAssetTypeVideo"]){
+            NSURL *url = asset.defaultRepresentation.url;
+        }
+    }
+//    dispatch_semaphore_t sem = dispatch_semaphore_create(0);
+//    dispatch_queue_t queue = dispatch_queue_create("uploadImg", NULL);
+//    dispatch_async(queue, ^{
+//        for (ALAsset *asset in assets) {
+//            if ([[asset valueForProperty:@"ALAssetPropertyType"] isEqual:@"ALAssetTypePhoto"]) {
+//                //执行要上传图片的操作...
+//                void (^uploadImg) (BOOL isFinish) = ^(BOOL isFinish){
+//                  //上传完成后回调
+//                    dispatch_semaphore_signal(sem);
+//                };
+//            }
+//            dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+//        }
+//    });
+    
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

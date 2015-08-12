@@ -29,6 +29,9 @@
                                     <action selector="enterAlbum:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pdi-Ks-Ehw"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UUv-Tg-sJ0">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="173"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -36,6 +39,9 @@
                             <constraint firstAttribute="centerX" secondItem="njr-HH-8qc" secondAttribute="centerX" id="ucR-uG-HTS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="myImageView" destination="UUv-Tg-sJ0" id="86I-Wv-nYy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
