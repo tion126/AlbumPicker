@@ -11,7 +11,6 @@
 #import "LSYAlbumCatalog.h"
 
 @interface ViewController ()<LSYAlbumCatalogDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *myImageView;
 
 @end
 
@@ -37,7 +36,6 @@
     for (ALAsset *asset in assets) {
         if ([[asset valueForProperty:@"ALAssetPropertyType"] isEqual:@"ALAssetTypePhoto"]) {
             UIImage * img = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
-            self.myImageView.image = img;
         }
         else if ([[asset valueForProperty:@"ALAssetPropertyType"] isEqual:@"ALAssetTypeVideo"]){
             NSURL *url = asset.defaultRepresentation.url;
